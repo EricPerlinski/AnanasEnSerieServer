@@ -7,13 +7,13 @@
 *** TODO cree les templates de base de l'application
 *** DONE exportation du QrCode en image
 *** TODO parser le resultat de l'api
-*** TODO 
+*** TODO definir des routes non transparentes pour les pages
 ** Problemes
 ** Ce qu'il reste a faire
 ** Indicateurs projet
-*** nombre taches effectuees
-*** nombre d'ananas consommes
-*** nombre de post-it utilises
+*** nombre taches effectuees 
+*** nombre d'ananas consommes 1
+*** nombre de post-it utilises 12
 *** nombre de commits
 
 

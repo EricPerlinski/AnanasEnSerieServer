@@ -1,0 +1,22 @@
+* <2014-12-15 lun.>
+** Ce qui doit etre fait
+*** TODO installer/configurer le serveur avec slim, twig, doctrine,...
+*** TODO generer des QrCodes
+*** TODO se connecter a une api via java sur un serveur
+*** TODO definir les routes de l'application
+*** TODO cree les templates de base de l'application
+*** TODO exportation du QrCode en image
+*** TODO parser le resultat de l'api
+*** TODO 
+** Problemes
+** Ce qu'il reste a faire
+** Indicateurs projet
+*** nombre taches effectues
+*** nombre d'ananas consomes
+*** nombre de post-it utilise
+*** nombre de commit
+
+
+
+* A faire plus tard
+** TODO definir le format des donnees en JSON

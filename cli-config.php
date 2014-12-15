@@ -1,27 +1,23 @@
 <?php
-use Doctrine\ORM\Tools\Setup;
+define('ROOT', __DIR__);
 
-require 'vendor/autoload.php';
+use Doctrine\ORM\Tools\Console\ConsoleRunner;
 
-$path = array('src/App/Entity');
-$devMode = true;
+require_once __DIR__ . '/vendor/autoload.php';
 
-$config = Setup::createAnnotationMetadataConfiguration($path, $devMode);
+try {
+    $app = new Slim\Slim(array(
+        'debug'         => true
+    ));
 
-$connectionOptions = array(
-	'driver'   => 'pdo_mysql',
-	//'host'     => 'https://webpanel.telecomnancy.univ-lorraine.fr/alternc-sql/',
-	'host'     => 'localhost',
-	'dbname'   => 'codingweek_prj11',
-	//'user'     => 'codingweek_prj11',
-	'user'     => 'root',
-	//'password' => 'i1FpwTi0a'
-	'password' => ''
-);
+    $app->config = require(__DIR__ . '/app/config/config.php');
 
-$em = \Doctrine\ORM\EntityManager::create($connectionOptions, $config);
 
-$helpers = new Symfony\Component\Console\Helper\HelperSet(array(
-	'db' => new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($em->getConnection()),
-	'em' => new \Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper($em)
-	));
+    $em = new Bridge\Doctrine\EntityManager($app);
+    $em  = $em->getEntityManager();
+
+    return ConsoleRunner::createHelperSet($entityManager);
+
+} catch (Exception $e) {
+    print_r($e->getMessage());
+}

@@ -26,6 +26,13 @@ class QRCode
      * @Column(name="counter", type="integer")
      */
     protected $counter;
+
+    /**
+     * @var string
+     *
+     * @Column(name="title", type="string", length=255)
+     */
+    protected $title;
     
 
     /**
@@ -59,5 +66,28 @@ class QRCode
     public function getCounter()
     {
         return $this->counter;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return QRCode
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 }

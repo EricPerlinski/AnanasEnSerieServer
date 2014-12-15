@@ -1,8 +1,3 @@
-Pour le moment les URL fonctionnelles sont : 
-
-Ce projet web permet de créer des sondages accessibles via un QR Code dans un navigateur.
-Ceux-ci sont administrables depuis un client java.
-
 Ce dépôt concerne le serveur PHP.
 Le dépôt correspondant au client est disponnible à l'adresse suivante :
 https://bitbucket.org/telecomnancy/codingweek_prj11-client
@@ -19,5 +14,5 @@ Url disponnibles RELEASE_DAY_1 :
 Fichiers liés :
 
 - INSTALL permet de spécifier comment installer le projet.
-- #journal.org# indique les tâches restantes, et donne des indicateurs projet.
+- journal.org indique les tâches restantes, et donne des indicateurs projet.
 - contributors.txt contient la liste des membres ayqnt participé à ce projet.

@@ -27,4 +27,37 @@ class QRCode
      */
     protected $counter;
     
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set counter
+     *
+     * @param integer $counter
+     * @return QRCode
+     */
+    public function setCounter($counter)
+    {
+        $this->counter = $counter;
+
+        return $this;
+    }
+
+    /**
+     * Get counter
+     *
+     * @return integer 
+     */
+    public function getCounter()
+    {
+        return $this->counter;
+    }
 }

@@ -11,6 +11,6 @@ Configurez la base de données en créant une copie du fichier /app/config/datab
 nommée /app/config/database.php .
 Adaptez les champs de ce fichier à votre propre configuration.
 
-Vous pouvez maintenant initialiser votre base grâce au fichier base.dump
+Vous pouvez maintenant initialiser votre base grâce au fichier base.sql
 
 Vous pouvez finalement déposer tout le contenu du projet dans le dossier visible de votre serveur (/var/www pour apache) via FTP.

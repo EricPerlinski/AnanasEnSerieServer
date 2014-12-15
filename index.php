@@ -2,6 +2,8 @@
 
 use Bridge\Doctrine\EntityManager as EM;
 
+use App\Entity\QRCode as QR;
+
 require 'vendor/autoload.php';
 
 require 'vendor/slim/slim/Slim/Slim.php';
@@ -24,11 +26,16 @@ $app->get('/', function () use($app,$twig){
 
 $app->post('/admin/add', function () use($app,$twig){
     //traitement des params POST
+    $titre;
 	if(isset($_POST['titre'])){
 		$titre = $_POST['titre'];
     }else{
     	$app->notFound();
     }
+
+	$qr = new QR();
+	$qr->setTitre($titre);
+	
 	//envoie du resultat
     echo "{id:123456,titre:$titre}";
     $app->response->setStatus(200);

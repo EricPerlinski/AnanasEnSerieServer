@@ -1,5 +1,6 @@
 {% extends "template.php" %}
-{% block title %}Index{% endblock %}
+
+{% block title %}HOME{% endblock %}
 
 {% block content %}
 	<h1>Ananas en serie</h1>

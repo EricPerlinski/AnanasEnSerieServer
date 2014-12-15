@@ -3,12 +3,14 @@
 <head>
 	{% block head %}
 	<link rel="stylesheet" href="style.css" />
-	<title>{% block title %}{% endblock %} - My Webpage</title>
+	<title>{% block title %}{% endblock %}</title>
 	{% endblock %}
 </head>
 <body>
-	<div id="header">{% block header %}{% endblock %}</div>	
+	<div id="header">{% include 'header.php' %}</div>	
+
 	<div id="content">{% block content %}{% endblock %}</div>
-	<div id="footer">{% block footer %}{% endblock %}</div>
+	
+	<div id="footer">{% include 'footer.php' %}</div>
 </body>
 </html>

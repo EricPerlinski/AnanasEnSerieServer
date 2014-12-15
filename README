@@ -1,0 +1,9 @@
+Ce projet web permet de créé des sondages accessible via un navigateur web et administrable depuis un client java
+
+Pour le moment les URL fonctionnelles sont : 
+
+/ : qui affiche la page d'accueil (pas complète pour le moment)
+
+/admin/add : qui prend en paramètre POST un paramètre "titre" qui sera le titre du sondage
+
+/client/view/id : id sera un entier et il permettra d'incrementer le nombre de vue et d'afficher un message de remerciement. POur le moment elle n'est pas implémenté correctement 

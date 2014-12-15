@@ -1,9 +1,23 @@
-Ce projet web permet de créé des sondages accessible via un navigateur web et administrable depuis un client java
-
 Pour le moment les URL fonctionnelles sont : 
 
-/ : qui affiche la page d'accueil (pas complète pour le moment)
+Ce projet web permet de créer des sondages accessibles via un QR Code dans un navigateur.
+Ceux-ci sont administrables depuis un client java.
 
-/admin/add : qui prend en paramètre POST un paramètre "titre" qui sera le titre du sondage
+Ce dépôt concerne le serveur PHP.
+Le dépôt correspondant au client est disponnible à l'adresse suivante :
+https://bitbucket.org/telecomnancy/codingweek_prj11-client
 
-/client/view/id : id sera un entier et il permettra d'incrementer le nombre de vue et d'afficher un message de remerciement. POur le moment elle n'est pas implémenté correctement 
+Url disponnibles RELEASE_DAY_1 :
+
+- / : qui affiche la page d'accueil (pas complète pour le moment).
+
+- /admin/add : qui prend en paramètres POST un "titre", qui sera le titre du sondage.
+
+- /client/view/id : permet d'incrementer le nombre de vues d'un sondages et d'afficher un message de remerciement
+(cette méthode n'est pas encore implémentée correctement).
+
+Fichiers liés :
+
+- INSTALL permet de spécifier comment installer le projet.
+- #journal.org# indique les tâches restantes, et donne des indicateurs projet.
+- contributors.txt contient la liste des membres ayqnt participé à ce projet.

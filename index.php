@@ -9,7 +9,6 @@ require 'vendor/slim/slim/Slim/Slim.php';
 
 
 $app = new \Slim\Slim(array(
-	'view' => 'TwigView',
 	'view' => new \Slim\Views\Twig()
 	));
 

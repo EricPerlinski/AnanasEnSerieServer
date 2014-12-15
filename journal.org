@@ -1,10 +1,10 @@
 * <2014-12-15 lun.>
 ** Ce qui doit etre fait
-*** TODO installer/configurer le serveur avec slim, twig, doctrine,...
+*** DONE installer/configurer le serveur avec slim, twig, doctrine,...
 *** DONE generer des QrCodes
 *** DONE se connecter a une api via java sur un serveur
-*** TODO definir les routes de l'application
-*** TODO cree les templates de base de l'application
+*** DONE definir les routes de l'application
+*** DONE cree les templates de base de l'application
 *** DONE exportation du QrCode en image
 *** TODO parser le resultat de l'api
 *** TODO definir des routes non transparentes pour les pages
@@ -19,4 +19,7 @@
 
 
 * A faire plus tard
+** TODO API admin
+** TODO creation modele
+** TODO structure mvc
 ** TODO definir le format des donnees en JSON

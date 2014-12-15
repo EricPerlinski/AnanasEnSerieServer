@@ -1,0 +1,26 @@
+Suivre les instructions pour installer l'applcation web
+
+Mettre les sources dans le dossier visible par le serveur (/var/www pour apache)
+
+Ensuite créer un fichier database.php dans app/config
+Y inserer : 
+
+<?php
+return array(
+	'driver'   => 'pdo_mysql',
+	'host'     => 'localhost',
+	'dbname'   => '',
+	'user'     => '',
+	'password' => ''
+);
+
+
+En adaptant les champs par votre configuration.
+
+Une fois le fichier créé, lancer la commande : 
+
+vendor/bin/doctrine orm:schema-tool:create
+
+Maintenant l'application sera accessible depuis le reseau
+
+

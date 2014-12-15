@@ -1,26 +1,13 @@
-Suivre les instructions pour installer l'applcation web
+Suivre les instructions pour installer l'application web :
 
-Mettre les sources dans le dossier visible par le serveur (/var/www pour apache)
+Lancer la commande composer install, après avoir installé composer (gestionnaire de dépendances PHP).
 
-Ensuite créer un fichier database.php dans app/config
-Y inserer : 
+Créer une base de données pour utiliser l'application.
 
-<?php
-return array(
-	'driver'   => 'pdo_mysql',
-	'host'     => 'localhost',
-	'dbname'   => '',
-	'user'     => '',
-	'password' => ''
-);
+Configurer la base de données en créant une copie du fichier /app/config/database.php.template
+nommée /app/config/database.php .
+Adaptant les champs de ce fichier à votre propre configuration.
 
+Vous pouvez maintenant initialiser votre base grâce au fichier base.dump
 
-En adaptant les champs par votre configuration.
-
-Une fois le fichier créé, lancer la commande : 
-
-vendor/bin/doctrine orm:schema-tool:create
-
-Maintenant l'application sera accessible depuis le reseau
-
-
+Vous pouvez finalement déposer tout le contenu du projet dans le dossier visible de votre serveur (/var/www pour apache) via FTP.

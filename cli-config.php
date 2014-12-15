@@ -16,7 +16,7 @@ try {
     $em = new Bridge\Doctrine\EntityManager($app);
     $em  = $em->getEntityManager();
 
-    return ConsoleRunner::createHelperSet($entityManager);
+    return ConsoleRunner::createHelperSet($em);
 
 } catch (Exception $e) {
     print_r($e->getMessage());

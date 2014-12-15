@@ -8,15 +8,13 @@
 *** DONE exportation du QrCode en image
 *** TODO parser le resultat de l'api
 *** TODO 
-** Problemes
+** Problèmes
 ** Ce qu'il reste a faire
 ** Indicateurs projet
-*** nombre taches effectuees
-*** nombre d'ananas consommes
-*** nombre de post-it utilises
-*** nombre de commits
-
-
+*** nombre de taches effectuees 3
+*** nombre de post-it utilises 12
+*** nombre de commits 68
+*** nombre d'ananas consommes 1
 
 * A faire plus tard
 ** TODO definir le format des donnees en JSON

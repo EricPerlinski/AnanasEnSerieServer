@@ -1,1 +1,2 @@
-ANANAS EN SERIE
+<?php
+require 'vendor/autoload.php';

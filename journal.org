@@ -11,10 +11,10 @@
 ** Problemes
 ** Ce qu'il reste a faire
 ** Indicateurs projet
-*** nombre taches effectues
-*** nombre d'ananas consomes
-*** nombre de post-it utilise
-*** nombre de commit
+*** nombre taches effectuees
+*** nombre d'ananas consommes
+*** nombre de post-it utilises
+*** nombre de commits
 
 
 

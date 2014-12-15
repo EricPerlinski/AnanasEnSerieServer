@@ -24,11 +24,14 @@ $app->get('/', function () use($app,$twig){
 
 $app->post('/admin/add', function () use($app,$twig){
     //traitement des params POST
-
-
+	if(isset($_POST['titre'])){
+		$titre = $_POST['titre'];
+    }else{
+    	$app->notFound();
+    }
 	//envoie du resultat
-	echo "{id:123456}";
-	$app->response->setStatus(200);
+    echo "{id:123456,titre:$titre}";
+    $app->response->setStatus(200);
 })->name('add');
 
 

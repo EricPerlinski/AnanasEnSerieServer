@@ -25,7 +25,7 @@ class QRCode
      *
      * @Column(name="counter", type="integer")
      */
-    protected $counter;
+    protected $counter = 0;
 
     /**
      * @var string

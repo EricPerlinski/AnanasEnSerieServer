@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "psr-0": { "": ["src/"]}
+    },
+    "require": {
+        "slim/slim": "2.*",
+        "twig/twig": "~1.16",
+        "doctrine/orm": "~2.4.6"
+    }
+}

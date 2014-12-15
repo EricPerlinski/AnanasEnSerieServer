@@ -5,6 +5,7 @@
     "require": {
         "slim/slim": "2.*",
         "twig/twig": "~1.16",
-        "doctrine/orm": "~2.4.6"
+        "doctrine/orm": "~2.4.6",
+        "twbs/bootstrap": "3.3.*@dev"
     }
 }

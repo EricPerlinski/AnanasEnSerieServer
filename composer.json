@@ -6,6 +6,8 @@
         "slim/slim": "2.*",
         "twig/twig": "~1.16",
         "doctrine/orm": "~2.4.6",
-        "twbs/bootstrap": "3.3.*@dev"
+        "twbs/bootstrap": "3.3.*@dev",
+	"slim/extras": "dev-master",
+        "slim/views": "0.1.*"
     }
 }

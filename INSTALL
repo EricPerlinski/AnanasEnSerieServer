@@ -1,12 +1,15 @@
-Suivre les instructions pour installer l'application web :
+Le projet est disponnible à l'adresse suivante :
+http://codingweek.telecomnancy.eu/projet11
 
-Lancer la commande composer install, après avoir installé composer (gestionnaire de dépendances PHP).
+Vous pouvez cependant faire votre propre installation de cette manière :
 
-Créer une base de données pour utiliser l'application.
+Lancez la commande composer install, après avoir installé composer (gestionnaire de dépendances PHP).
 
-Configurer la base de données en créant une copie du fichier /app/config/database.php.template
+Créez une base de données pour utiliser l'application.
+
+Configurez la base de données en créant une copie du fichier /app/config/database.php.template
 nommée /app/config/database.php .
-Adaptant les champs de ce fichier à votre propre configuration.
+Adaptez les champs de ce fichier à votre propre configuration.
 
 Vous pouvez maintenant initialiser votre base grâce au fichier base.dump
 

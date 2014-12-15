@@ -20,7 +20,7 @@ class EntityManager
     /**
      * @return EntityManager
      */
-    public function createEntityManager()
+    public function getEntityManager()
     {
         if (null !== $this->em) {
             return $this->em;

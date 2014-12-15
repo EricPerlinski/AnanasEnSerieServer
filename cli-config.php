@@ -14,7 +14,7 @@ try {
 
 
     $em = new Bridge\Doctrine\EntityManager($app);
-    $entityManager  = $em->createEntityManager();
+    $em  = $em->getEntityManager();
 
     return ConsoleRunner::createHelperSet($entityManager);
 

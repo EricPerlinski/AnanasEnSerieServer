@@ -22,20 +22,17 @@
 ** Ce qui doit etre fait
 *** DONE parser JSON en java
 *** DONE Creer des fonctions de mis à jour pour le nombre de like en java
-*** TODO corriger erreur production
+*** DONE corriger erreur production
 *** DONE Joindre la creation du QRCode avec les requetes HTTP
 *** DONE Faire la fenetre swing
 *** DONE ajouter la vue pour admin sur le client
 *** DONE Tester l'application pour la partie de base
 *** DONE eviter les votes multiples
-*** TODO generer les path et pathAdmin aléatoirement
-*** TODO créer un .htaccess pour des problèmes de sécurité inter-étudiante
-*** TODO MVC refactoring pour l'api web
-*** TODO Générer QRCode administrateur pour avoir un lien vers la partie administration du QRCode
-*** TODO MVC refactoring pour le client Java
-*** TODO Ajout BDD -> path, pathAdmin,dateCreation 
-*** TODO Cas d'utilisation
-*** TODO diagramme de classe 
+*** DONE generer les path et pathAdmin aléatoirement
+*** DONE Générer QRCode administrateur pour avoir un lien vers la partie administration du QRCode
+*** DONE Ajout BDD -> path, pathAdmin,dateCreation 
+*** DONE Cas d'utilisation
+*** DONE diagramme de classe 
 ** Problèmes
 ** Ce qu'il reste a faire
 *** Faire des vues completes (CSS+JS)
@@ -47,12 +44,14 @@
 
 * <2014-12-17 mer.>
 ** Ce qui doit etre fait
+*** TODO créer un .htaccess pour des problèmes de sécurité inter-étudiante
 *** TODO creer une url de test de l'API
 *** TODO verifier l'url de test de l'API
 *** TODO Faire un login
 *** TODO securiser avec des .htacces, ...
 *** TODO verifier si l'appli android fait 2 fois la connexion
 *** TODO CSS, JS, ...
+*** TODO MVC refactoring pour le client Java
 *** TODO Reflechir sur des sondages plus évolué
 ** Problèmes
 ** Ce qu'il reste a faire

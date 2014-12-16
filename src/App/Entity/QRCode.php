@@ -11,6 +11,12 @@ use Doctrine\ORM\Mapping;
  */
 class QRCode
 {
+
+    public function __construct(){
+        $this->counter = 0;
+        $this->creationDate = new \DateTime();
+    }
+
     /**
      * @var integer
      *
@@ -25,7 +31,7 @@ class QRCode
      *
      * @Column(name="counter", type="integer")
      */
-    protected $counter = 0;
+    protected $counter;
 
     /**
      * @var \DateTime

@@ -6,7 +6,7 @@
 *** DONE definir les routes de l'application
 *** DONE cree les templates de base de l'application
 *** DONE exportation du QrCode en image
-*** TODO parser le resultat de l'api
+*** DONE parser le resultat de l'api
 *** TODO definir des routes non transparentes pour les pages
 ** Problèmes
 *** Mis ene production, il doit manquer un module
@@ -17,22 +17,33 @@
 *** nombre de post-it utilises 12
 *** nombre de commits 70
 *** nombre d'ananas consommes 1
+*** nombre total d'ananas consommes 1
 * <2014-12-16 mar.>
 ** Ce qui doit etre fait
 *** DONE parser JSON en java
+*** DONE Creer des fonctions de mis à jour pour le nombre de like en java
 *** TODO corriger erreur production
-*** TODO Joindre la creation du QRCode avec les requetes HTTP
-*** TODO Faire la fenetre swing
-*** TODO ajouter la vue pour admin sur le client
-*** TODO Tester l'applicattoin pour la partie de base
+*** DONE Joindre la creation du QRCode avec les requetes HTTP
+*** DONE Faire la fenetre swing
+*** DONE ajouter la vue pour admin sur le client
+*** DONE Tester l'application pour la partie de base
 *** DONE eviter les votes multiples
 *** TODO generer les path et pathAdmin aléatoirement
+*** TODO créer un .htaccess pour des problèmes de sécurité inter-étudiante
+*** TODO MVC refactoring pour l'api web
+*** TODO Générer QRCode administrateur pour avoir un lien vers la partie administration du QRCode
+*** TODO MVC refactoring pour le client Java
+*** TODO Ajout BDD -> path, pathAdmin,dateCreation 
+*** TODO Cas d'utilisation
+*** TODO diagramme de classe 
 ** Problèmes
 ** Ce qu'il reste a faire
 *** Faire des vues completes (CSS+JS)
 *** Login
 *** Faire des bonus
 ** Indicateurs projet
+*** nombre d'ananas consommes 1
+*** nombre total d'ananas consommes 2
 
 * <2014-12-17 mer.>
 ** Ce qui doit etre fait

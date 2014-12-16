@@ -20,6 +20,7 @@ Url disponnibles RELEASE_DAY_1 :
 
 - /api/admin/get/pathAdmin : récupère les informations d'un sondage par son pathAdmin.
 
+- /api/test : retourne le texte "ananas" afin de tester dans le client si l'url du serveur est correct
 
 Fichiers liés :
 

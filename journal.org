@@ -45,19 +45,28 @@
 *** nombre d'ananas consommes 1
 *** nombre total d'ananas consommes 2
 
-* <2014-12-17 mar.>
+* <2014-12-17 mer.>
 ** Ce qui doit etre fait
+*** TODO creer une url de test de l'API
+*** TODO verifier l'url de test de l'API
+*** TODO Faire un login
+*** TODO securiser avec des .htacces, ...
+*** TODO verifier si l'appli android fait 2 fois la connexion
+*** TODO CSS, JS, ...
+*** TODO Reflechir sur des sondages plus évolué
 ** Problèmes
 ** Ce qu'il reste a faire
 ** Indicateurs projet
 
-* <2014-12-18 mar.>
+* <2014-12-18 jeu.>
 ** Ce qui doit etre fait
+*** TODO faire des stats avancés (par rapport aux heure, ...)
+*** TODO faire des sondages evolués
 ** Problèmes
 ** Ce qu'il reste a faire
 ** Indicateurs projet
 
-* <2014-12-19 mar.>
+* <2014-12-19 ven.>
 ** Ce qui doit etre fait
 ** Problèmes
 ** Ce qu'il reste a faire

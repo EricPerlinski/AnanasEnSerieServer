@@ -89,6 +89,10 @@ $app->get('/admin/get/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
 /****** API ******/
 /*****************/
 
+$app->get('/api/test', function(){
+	echo "ananas";
+})->name('test');
+
 
 $app->post('/api/admin/add', function () use($app,$twig,$em){
     //traitement des params POST

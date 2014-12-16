@@ -52,9 +52,9 @@ $app->get('/flash/:path', function ($path) use($app,$twig,$em){
 
 	//Render
 	$title = $qr->getTitle();
-	
+	$counter = $qr->getCounter();
 
-	echo $twig->render('vote.php',array('name' => $title));
+	echo $twig->render('flash.php',array('name' => $title , 'counter' => $counter));
 	$app->response->setStatus(200);
 
 })->name('flash')->conditions(['path' => '[0-9a-zA-Z]+']);

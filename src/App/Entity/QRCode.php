@@ -28,12 +28,25 @@ class QRCode
     protected $counter = 0;
 
     /**
+     * @var \DateTime
+     *
+     * @Column(name="creationDate", type="datetimetz")
+     */
+    protected $creationDate;
+
+     /**
      * @var string
      *
-     * @Column(name="title", type="string", length=255)
+     * @Column(name="path", type="string", length=255)
      */
-    protected $title;
-    
+    protected $path;
+
+     /**
+     * @var string
+     *
+     * @Column(name="pathAdmin", type="string", length=255)
+     */
+    protected $pathAdmin;
 
     /**
      * Get id
@@ -89,5 +102,74 @@ class QRCode
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set creationDate
+     *
+     * @param \datetimez $creationDate
+     * @return QRCode
+     */
+    public function setCreationDate(\datetimez $creationDate)
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get creationDate
+     *
+     * @return \datetimez 
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return QRCode
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Set pathAdmin
+     *
+     * @param string $pathAdmin
+     * @return QRCode
+     */
+    public function setPathAdmin($pathAdmin)
+    {
+        $this->pathAdmin = $pathAdmin;
+
+        return $this;
+    }
+
+    /**
+     * Get pathAdmin
+     *
+     * @return string 
+     */
+    public function getPathAdmin()
+    {
+        return $this->pathAdmin;
     }
 }

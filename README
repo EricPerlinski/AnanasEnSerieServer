@@ -4,12 +4,22 @@ https://bitbucket.org/telecomnancy/codingweek_prj11-client
 
 Url disponnibles RELEASE_DAY_1 :
 
+** WEB
+
 - / : qui affiche la page d'accueil (pas complète pour le moment).
 
-- /admin/add : qui prend en paramètres POST un "titre", qui sera le titre du sondage.
-
-- /client/view/id : permet d'incrementer le nombre de vues d'un sondages et d'afficher un message de remerciement
+- /flash/path :  permet d'incrementer le nombre de vues d'un sondages et d'afficher un message de remerciement
 (cette méthode n'est pas encore implémentée correctement).
+
+- /admin/get/pathAdmin : permet de voir le nombre de vote 
+
+
+** API
+
+- /api/admin/add : qui prend en paramètres POST un "titre", qui sera le titre du sondage. Retourne le path et pathAdmin du sondage
+
+- /api/admin/get/pathAdmin : recupere les informations d'un sondage par son pathAdmin
+
 
 Fichiers liés :
 

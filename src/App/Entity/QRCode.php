@@ -34,6 +34,13 @@ class QRCode
     protected $counter;
 
     /**
+     * @var string
+     *
+     * @Column(name="title", type="string", length=255)
+     */
+    protected $title;
+
+    /**
      * @var \DateTime
      *
      * @Column(name="creationDate", type="datetimetz")
@@ -177,5 +184,15 @@ class QRCode
     public function getPathAdmin()
     {
         return $this->pathAdmin;
+    }
+
+
+    /**
+    * Increment counter
+    *
+    */
+    public function increment()
+    {
+        $this->counter++;
     }
 }

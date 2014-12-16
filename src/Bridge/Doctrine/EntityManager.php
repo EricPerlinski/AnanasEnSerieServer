@@ -9,7 +9,7 @@ use Slim\Slim;
 class EntityManager
 {
 
-    private $em;
+    private static $em;
     private $app;
 
     public function __construct(Slim $app)
@@ -22,8 +22,8 @@ class EntityManager
      */
     public function getEntityManager()
     {
-        if (null !== $this->em) {
-            return $this->em;
+        if (null !== self::$em) {
+            return self::$em;
         }
         $path = array(ROOT . '/src/App/Entity');
 
@@ -36,15 +36,8 @@ class EntityManager
             'user'     => $this->app->config['database']['user'],
             'password' => $this->app->config['database']['password']
         );
-
-        return EM::create($connectionOptions, $config);
+        self::$em = EM::create($connectionOptions, $config); 
+        return self::$em;
     }
 
-    public function getRepository($repository)
-    {
-        if (null === $this->em) {
-            $this->em = $this->createEntityManager();
-        }
-        return $this->em->getRepository(sprintf('App\\Entity\\' . $repository));
-    }
 }

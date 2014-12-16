@@ -38,8 +38,10 @@
 *** Login
 *** Faire des bonus
 ** Indicateurs projet
-*** nombre d'ananas consommes 1
-*** nombre total d'ananas consommes 2
+*** nombre de taches effectuees 21
+*** nombre de post-it utilises 25
+*** nombre de commits 152
+*** nombre d'ananas consommes 2
 
 * <2014-12-17 mer.>
 ** Ce qui doit etre fait

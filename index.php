@@ -130,7 +130,7 @@ $app->get('/api/admin/get/:pathAdmin', function ($pathAdmin) use($app,$twig,$em)
 
 	//JSON Encode
 	$qrJson = json_encode($qr);
-	echo $qrJson;
+	echo "[$qrJson]";
 	$app->response->setStatus(200);
 
 })->name('viewAdmin')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);

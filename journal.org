@@ -2,14 +2,14 @@
 ** Ce qui doit etre fait
 *** DONE installer/configurer le serveur avec slim, twig, doctrine,...
 *** DONE generer des QrCodes
-*** DONE se connecter a une api via java sur un serveur
+*** DONE se connecter a une API via java sur un serveur
 *** DONE definir les routes de l'application
 *** DONE cree les templates de base de l'application
 *** DONE exportation du QrCode en image
 *** DONE parser le resultat de l'api
-*** TODO definir des routes non transparentes pour les pages
+*** DONE definir des routes non transparentes pour les pages
 ** Problèmes
-*** Mis ene production, il doit manquer un module
+*** Mise en production, il doit manquer un module
 ** Ce qu'il reste a faire
 *** Faire le lien entre la partie QRCode et connexion au serveur
 ** Indicateurs projet
@@ -17,7 +17,6 @@
 *** nombre de post-it utilises 12
 *** nombre de commits 70
 *** nombre d'ananas consommes 1
-*** nombre total d'ananas consommes 1
 * <2014-12-16 mar.>
 ** Ce qui doit etre fait
 *** DONE parser JSON en java
@@ -44,7 +43,7 @@
 
 * <2014-12-17 mer.>
 ** Ce qui doit etre fait
-*** TODO créer un .htaccess pour des problèmes de sécurité inter-étudiante
+*** TODO creer un .htaccess pour des problèmes de sécurité inter-étudiants
 *** TODO creer une url de test de l'API
 *** TODO verifier l'url de test de l'API
 *** TODO Faire un login

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping;
  * @Entity
  * @Table(name="qrcode")
  */
-class QRCode
+class QRCode implements \JsonSerializable
 {
 
     public function __construct(){
@@ -194,5 +194,12 @@ class QRCode
     public function increment()
     {
         $this->counter++;
+    }
+
+    public function jsonSerialize() {
+        return array(   'path'      =>  $this->path,
+                        'pathAdmin' =>  $this->pathAdmin,
+                        'title'     =>  $this->title,
+                        'counter'   =>  $this->counter);
     }
 }

@@ -3,5 +3,5 @@
 {% block title %}Résultat sondage {{ nom }} {% endblock %}
 
 {% block content %}
-	Merci d'avoir voté pour {{nom}}
+	Merci d'avoir voté pour {{name}}
 {% endblock %}

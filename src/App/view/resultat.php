@@ -3,5 +3,5 @@
 {% block title %}Résultat sondage {{ nom }} {% endblock %}
 
 {% block content %}
-	IL y a {{nb}} votes pour {{nom}}
+	IL y a {{counter}} votes pour {{name}}
 {% endblock %}

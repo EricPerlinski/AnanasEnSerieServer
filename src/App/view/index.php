@@ -1,7 +1,9 @@
 {% extends "template.php" %}
 
-{% block title %}HOME{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block content %}
-	<h1>Ananas en serie</h1>
+	Application java : <a href="#">lien</a>
+	<br>
+	Pour utiliser l'application : "java -jar appli.jar"
 {% endblock %}

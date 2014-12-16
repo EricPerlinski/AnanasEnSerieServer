@@ -23,10 +23,10 @@
 *** DONE parser JSON en java
 *** DONE Creer des fonctions de mis à jour pour le nombre de like en java
 *** TODO corriger erreur production
-*** TODO Joindre la creation du QRCode avec les requetes HTTP
-*** TODO Faire la fenetre swing
-*** TODO ajouter la vue pour admin sur le client
-*** TODO Tester l'application pour la partie de base
+*** DONE Joindre la creation du QRCode avec les requetes HTTP
+*** DONE Faire la fenetre swing
+*** DONE ajouter la vue pour admin sur le client
+*** DONE Tester l'application pour la partie de base
 *** DONE eviter les votes multiples
 *** TODO generer les path et pathAdmin aléatoirement
 *** TODO créer un .htaccess pour des problèmes de sécurité inter-étudiante

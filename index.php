@@ -96,15 +96,15 @@ $app->get('/api/test', function(){
 
 $app->post('/api/admin/add', function () use($app,$twig,$em){
     //traitement des params POST
-	$titre;
-	if(isset($_POST['titre'])){
-		$titre = $_POST['titre'];
+	$title;
+	if(isset($_POST['title'])){
+		$title = $_POST['title'];
 	}else{
 		$app->notFound();
 	}
 
 	$qr = new QRCode();
-	$qr->setTitle($titre);
+	$qr->setTitle($title);
 	$qr->setPath(rand(1,1000));
 	$qr->setPathAdmin(rand(1,1000));
 	

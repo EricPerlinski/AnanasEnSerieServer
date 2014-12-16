@@ -36,6 +36,11 @@
 
 * <2014-12-17 mar.>
 ** Ce qui doit etre fait
+*** TODO Faire un login
+*** TODO securiser avec des .htacces, ...
+*** TODO verifier si l'appli android fait 2 fois la connexion
+*** TODO CSS, JS, ...
+*** TODO Reflechir sur des sondages plus évolué
 ** Problèmes
 ** Ce qu'il reste a faire
 ** Indicateurs projet

@@ -6,21 +6,20 @@ Url disponnibles RELEASE_DAY_1 :
 
 ** WEB
 
-- / : qui affiche la page d'accueil (pas complète pour le moment).
+- / : qui affiche la page d'accueil et permet de télecharger le client java (pas complète pour le moment).
 
-- /flash/path :  permet d'incrementer le nombre de vues d'un sondages et d'afficher un message de remerciement
-(cette méthode n'est pas encore implémentée correctement).
+- /flash/path :  permet d'incrementer le nombre de vues d'un sondages et d'afficher un message de remerciement.
 
 - /admin/get/pathAdmin : permet de voir le nombre de votes. 
 
 
 ** API
 
-- /api/admin/add : qui prend en paramètres POST un "titre", qui sera le titre du sondage. Retourne le path et pathAdmin du sondage.
+- /api/admin/add : qui prend en paramètres POST un "title", qui sera le titre du sondage. Retourne le path et pathAdmin du sondage.
 
 - /api/admin/get/pathAdmin : récupère les informations d'un sondage par son pathAdmin.
 
-- /api/test : retourne le texte "ananas" afin de tester dans le client si l'url du serveur est correct
+- /api/test : retourne le texte "ananas" afin de tester dans le client si l'url du serveur est correct.
 
 Fichiers liés :
 

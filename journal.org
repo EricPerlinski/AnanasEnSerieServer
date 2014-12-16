@@ -9,12 +9,51 @@
 *** TODO parser le resultat de l'api
 *** TODO definir des routes non transparentes pour les pages
 ** Problèmes
+*** Mis ene production, il doit manquer un module
 ** Ce qu'il reste a faire
+*** Faire le lien entre la partie QRCode et connexion au serveur
 ** Indicateurs projet
 *** nombre de taches effectuees 6
 *** nombre de post-it utilises 12
 *** nombre de commits 70
 *** nombre d'ananas consommes 1
+* <2014-12-16 mar.>
+** Ce qui doit etre fait
+*** DONE parser JSON en java
+*** TODO corriger erreur production
+*** TODO Joindre la creation du QRCode avec les requetes HTTP
+*** TODO Faire la fenetre swing
+*** TODO ajouter la vue pour admin sur le client
+*** TODO Tester l'applicattoin pour la partie de base
+*** DONE eviter les votes multiples
+*** TODO generer les path et pathAdmin aléatoirement
+** Problèmes
+** Ce qu'il reste a faire
+*** Faire des vues completes (CSS+JS)
+*** Login
+*** Faire des bonus
+** Indicateurs projet
+
+* <2014-12-17 mar.>
+** Ce qui doit etre fait
+** Problèmes
+** Ce qu'il reste a faire
+** Indicateurs projet
+
+* <2014-12-18 mar.>
+** Ce qui doit etre fait
+** Problèmes
+** Ce qu'il reste a faire
+** Indicateurs projet
+
+* <2014-12-19 mar.>
+** Ce qui doit etre fait
+** Problèmes
+** Ce qu'il reste a faire
+** Indicateurs projet
+
+
+
 
 * A faire plus tard
 ** TODO definir le format des donnees en JSON

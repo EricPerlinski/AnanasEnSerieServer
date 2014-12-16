@@ -41,21 +41,30 @@ $app->get('/', function () use($app,$twig){
 
 $app->get('/flash/:path', function ($path) use($app,$twig,$em){
 
-	$qr = $em->getRepository("App\Entity\QRCode")->findBy(array('path' => $path));
-	if(count($qr)!=1){
-		$app->notFound();
+	$vote = $app->getCookie("$path");
+	if($vote){
+		echo "Vous avez déjà voté";
+		$app->response->setStatus(200);
+	}else{
+
+		$qr = $em->getRepository("App\Entity\QRCode")->findBy(array('path' => $path));
+		if(count($qr)!=1){
+			$app->notFound();
+		}
+		$qr = $qr[0];
+		$qr->increment();
+		$em->persist($qr);
+		$em->flush();
+
+		$app->setCookie("$path",true);
+
+		//Render
+		$title = $qr->getTitle();
+		$counter = $qr->getCounter();
+
+		echo $twig->render('flash.php',array('name' => $title , 'counter' => $counter));
+		$app->response->setStatus(200);
 	}
-	$qr = $qr[0];
-	$qr->increment();
-	$em->persist($qr);
-	$em->flush();
-
-	//Render
-	$title = $qr->getTitle();
-	$counter = $qr->getCounter();
-
-	echo $twig->render('flash.php',array('name' => $title , 'counter' => $counter));
-	$app->response->setStatus(200);
 
 })->name('flash')->conditions(['path' => '[0-9a-zA-Z]+']);
 

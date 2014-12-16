@@ -11,14 +11,14 @@ Url disponnibles RELEASE_DAY_1 :
 - /flash/path :  permet d'incrementer le nombre de vues d'un sondages et d'afficher un message de remerciement
 (cette méthode n'est pas encore implémentée correctement).
 
-- /admin/get/pathAdmin : permet de voir le nombre de vote 
+- /admin/get/pathAdmin : permet de voir le nombre de votes. 
 
 
 ** API
 
-- /api/admin/add : qui prend en paramètres POST un "titre", qui sera le titre du sondage. Retourne le path et pathAdmin du sondage
+- /api/admin/add : qui prend en paramètres POST un "titre", qui sera le titre du sondage. Retourne le path et pathAdmin du sondage.
 
-- /api/admin/get/pathAdmin : recupere les informations d'un sondage par son pathAdmin
+- /api/admin/get/pathAdmin : récupère les informations d'un sondage par son pathAdmin.
 
 
 Fichiers liés :
@@ -26,3 +26,4 @@ Fichiers liés :
 - INSTALL permet de spécifier comment installer le projet.
 - journal.org indique les tâches restantes, et donne des indicateurs projet.
 - contributors.txt contient la liste des membres ayqnt participé à ce projet.
+- le dossier conception contient des documents présentant la conception de notre application.

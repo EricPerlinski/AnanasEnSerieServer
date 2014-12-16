@@ -47,6 +47,8 @@
 
 * <2014-12-18 mar.>
 ** Ce qui doit etre fait
+*** TODO faire des stats avancés (par rapport aux heure, ...)
+*** TODO faire des sondages evolués
 ** Problèmes
 ** Ce qu'il reste a faire
 ** Indicateurs projet

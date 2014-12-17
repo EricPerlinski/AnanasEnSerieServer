@@ -4,6 +4,7 @@ use Bridge\Doctrine\EntityManager as EM;
 
 use App\Entity\QRCode as QRCode;
 use App\Entity\Like as Like;
+use App\Entity\ClickLog as ClickLog;
 
 require 'vendor/autoload.php';
 
@@ -54,6 +55,9 @@ $app->get('/like/:path', function ($path) use($app,$twig,$em){
 		}
 		$qr = $qr[0];
 		$qr->increment();
+		$cl = new ClickLog();
+		$em->persist($cl);
+		$qr->addClickLog($cl);
 		$em->persist($qr);
 		$em->flush();
 

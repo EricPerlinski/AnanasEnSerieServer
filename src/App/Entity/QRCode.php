@@ -65,6 +65,15 @@ abstract class QRCode implements \JsonSerializable
     private $pathAdmin;
 
     /**
+     * @ManyToMany(targetEntity="ClickLog")
+     * @JoinTable(name="qrcode_clicklogs",
+     *      joinColumns={@JoinColumn(name="qrcode_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@JoinColumn(name="clicklog_id", referencedColumnName="id", unique=true)}
+     *      )
+     **/
+    private $clickLog;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -204,5 +213,38 @@ abstract class QRCode implements \JsonSerializable
                         'pathAdmin' =>  $this->pathAdmin,
                         'title'     =>  $this->title,
                         'counter'   =>  $this->counter);
+    }
+
+    /**
+     * Add clickLog
+     *
+     * @param \App\Entity\ClickLog $clickLog
+     * @return QRCode
+     */
+    public function addClickLog(\App\Entity\ClickLog $clickLog)
+    {
+        $this->clickLog[] = $clickLog;
+
+        return $this;
+    }
+
+    /**
+     * Remove clickLog
+     *
+     * @param \App\Entity\ClickLog $clickLog
+     */
+    public function removeClickLog(\App\Entity\ClickLog $clickLog)
+    {
+        $this->clickLog->removeElement($clickLog);
+    }
+
+    /**
+     * Get clickLog
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getClickLog()
+    {
+        return $this->clickLog;
     }
 }

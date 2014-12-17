@@ -15,7 +15,7 @@ class ClickLog implements \JsonSerializable
     public function __construct(){
         $this->date = new \DateTime();
     }
-    
+
     /**
      * @var integer
      *
@@ -31,4 +31,8 @@ class ClickLog implements \JsonSerializable
      * @Column(name="date", type="datetimetz")
      */
     private $date;
+
+    public function jsonSerialize() {
+        return array();
+    }
 }

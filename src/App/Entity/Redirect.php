@@ -18,7 +18,7 @@ class Redirect extends QRCode
      *
      * @Column(name="url", type="string", length=255)
      */
-    protected $url;
+    private $url;
 
     /**
      * Set path
@@ -48,4 +48,27 @@ class Redirect extends QRCode
         return $this;
     }
 
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     * @return Redirect
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string 
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
 }

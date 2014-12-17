@@ -27,42 +27,42 @@ abstract class QRCode implements \JsonSerializable
      * @Column(name="id", type="integer")
      * @GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @var integer
      *
      * @Column(name="counter", type="integer")
      */
-    protected $counter;
+    private $counter;
 
     /**
      * @var string
      *
      * @Column(name="title", type="string", length=255)
      */
-    protected $title;
+    private $title;
 
     /**
      * @var \DateTime
      *
      * @Column(name="creationDate", type="datetimetz")
      */
-    protected $creationDate;
+    private $creationDate;
 
      /**
      * @var string
      *
      * @Column(name="path", type="string", length=255)
      */
-    protected $path;
+    private $path;
 
      /**
      * @var string
      *
      * @Column(name="pathAdmin", type="string", length=255)
      */
-    protected $pathAdmin;
+    private $pathAdmin;
 
     /**
      * Get id

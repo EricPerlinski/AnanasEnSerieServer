@@ -28,7 +28,7 @@ class Survey extends QRCode
      */
     public function __construct()
     {
-        parent();
+        parent::__construct();
         $this->question = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

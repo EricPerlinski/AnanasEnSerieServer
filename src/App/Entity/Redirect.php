@@ -20,6 +20,14 @@ class Redirect extends QRCode
      */
     private $url;
 
+     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
 
     /**
      * Set url

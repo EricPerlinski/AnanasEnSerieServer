@@ -152,18 +152,3 @@ $app->get('/api/admin/get/:pathAdmin', function ($pathAdmin) use($app,$twig,$em)
 
 
 $app->run();
-
-//mini manuel d utilisation d entity manager
-// pour creer l'em
-// $em = new EM($app)->getEntityManager();
-// pour recuperer un repository avec des fonctions toutes faites
-// $em->getRepository('Machin')->findBy(array('email' => $email, 'pw' => $pswd));
-// pour recuperer par ID
-// $em->getRepository('Machin')->findById(4);
-// pour recuperer tout
-// $em->getRepository('Machin')->findAll();
-// pour enregistrer
-// $em->persist($machin)
-// $em->flush();
-//de memoire machin a son id qui a ete mis a jour apres le flush, mais pas sur
-//dans tous les cas il y a moyen de le recuperer

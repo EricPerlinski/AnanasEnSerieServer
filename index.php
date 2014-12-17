@@ -88,6 +88,9 @@ $app->get('/redirect/:path', function ($path) use($app,$twig,$em){
 	}
 
 	$em->persist($qr);
+	$cl = new ClickLog();
+	$em->persist($cl);
+	$qr->addClickLog($cl);
 	$em->flush();
 
 	$app->setCookie("$path",true);
@@ -97,7 +100,13 @@ $app->get('/redirect/:path', function ($path) use($app,$twig,$em){
 	
 })->name('redirect')->conditions(['path' => '[0-9a-zA-Z]+']);
 
+$app->get('/yes/:path', function ($path) use($app,$twig,$em){
+	
+})->name('yes')->conditions(['path' => '[0-9a-zA-Z]+']);
 
+$app->get('/no/:path', function ($path) use($app,$twig,$em){
+	
+})->name('no')->conditions(['path' => '[0-9a-zA-Z]+']);
 
 
 $app->get('/admin/get/like/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
@@ -208,6 +217,39 @@ $app->post('/api/admin/add/redirect', function () use($app,$twig,$em){
 	$app->response->setStatus(200);
 
 })->name('addLike');
+
+$app->post('/api/admin/add/redirect', function () use($app,$twig,$em){
+    //traitement des params POST
+
+	$json;
+	if(isset($_POST['objet'])){
+		$json = $_POST['objet'];
+	}else{ 
+		$app->notFound();
+	}
+
+	$obj = json_decode($json,true);
+	$qr = new YesNo();
+	$qr->setTitle($obj['title']);
+	$qr->setPath(rand(1,1000));
+	$qr->setPathAdmin(rand(1,1000));
+	$em->persist($qr);
+	$em->flush();
+
+	$qr->setPath(hash('crc32b', $qr->getCreationDate()->format('Y-m-d H:i:s') . $qr->getId()) . $qr->getId());
+	$qr->setPathAdmin(hash('crc32b', $qr->getCreationDate()->format('Y-m-d H:i:s') . 'admin' . $qr->getId()) . $qr->getId());
+	$em->persist($qr);
+	$em->flush();
+
+	
+	//RENDER
+	$id=$qr->getId();
+	$path=$qr->getPath();
+	$pathAdmin=$qr->getPathAdmin();
+	echo "[{\"path\":\"$path\",\"pathAdmin\":\"$pathAdmin\"}]";
+	$app->response->setStatus(200);
+
+})->name('addYesno');
 
 $app->get('/api/admin/get/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
 

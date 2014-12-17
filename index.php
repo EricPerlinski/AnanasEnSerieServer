@@ -111,8 +111,8 @@ $app->post('/api/admin/add', function () use($app,$twig,$em){
 	$em->persist($qr);
 	$em->flush();
 
-	$qr->setPath(hash('sha256', $qr->getCreationDate()->format('Y-m-d H:i:s') . $qr->getId()) . $qr->getId());
-	$qr->setPathAdmin(hash('sha256', $qr->getCreationDate()->format('Y-m-d H:i:s') . 'admin' . $qr->getId()) . $qr->getId());
+	$qr->setPath(hash('crc32b', $qr->getCreationDate()->format('Y-m-d H:i:s') . $qr->getId()) . $qr->getId());
+	$qr->setPathAdmin(hash('crc32b', $qr->getCreationDate()->format('Y-m-d H:i:s') . 'admin' . $qr->getId()) . $qr->getId());
 	$em->persist($qr);
 	$em->flush();
 

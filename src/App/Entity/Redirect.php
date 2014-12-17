@@ -20,34 +20,6 @@ class Redirect extends QRCode
      */
     private $url;
 
-    /**
-     * Set path
-     *
-     * @param string $path
-     * @return Redirect
-     */
-    public function setPath($path)
-    {
-        parent::setPath($path);
-        $this->path = self::prefix  . '/' .  $this->path;
-
-        return $this;
-    }
-
-    /**
-     * Set pathAdmin
-     *
-     * @param string $pathAdmin
-     * @return Redirect
-     */
-    public function setPathAdmin($pathAdmin)
-    {
-        parent::setPathAdmin($path);
-        $this->path = self::prefix . $this->pathAdmin;
-
-        return $this;
-    }
-
 
     /**
      * Set url

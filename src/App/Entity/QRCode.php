@@ -15,6 +15,10 @@ use Doctrine\ORM\Mapping;
 abstract class QRCode implements \JsonSerializable
 {
 
+
+    protected $prefix;
+
+
     public function __construct(){
         $this->counter = 0;
         $this->creationDate = new \DateTime();
@@ -152,18 +156,6 @@ abstract class QRCode implements \JsonSerializable
         return $this->creationDate;
     }
 
-    /**
-     * Set path
-     *
-     * @param string $path
-     * @return QRCode
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
 
     /**
      * Get path
@@ -175,18 +167,7 @@ abstract class QRCode implements \JsonSerializable
         return $this->path;
     }
 
-    /**
-     * Set pathAdmin
-     *
-     * @param string $pathAdmin
-     * @return QRCode
-     */
-    public function setPathAdmin($pathAdmin)
-    {
-        $this->pathAdmin = $pathAdmin;
-
-        return $this;
-    }
+  
 
     /**
      * Get pathAdmin
@@ -215,6 +196,7 @@ abstract class QRCode implements \JsonSerializable
                         'counter'   =>  $this->counter);
     }
 
+<<<<<<< HEAD
     /**
      * Add clickLog
      *
@@ -224,11 +206,26 @@ abstract class QRCode implements \JsonSerializable
     public function addClickLog(\App\Entity\ClickLog $clickLog)
     {
         $this->clickLog[] = $clickLog;
+=======
+
+
+
+     /**
+     * Set path
+     *
+     * @param string $path
+     * @return Like
+     */
+    public function setPath($path)
+    {
+        $this->path = $this->prefix . $path;
+>>>>>>> df34ec60a4b0cfb427fc2b1c465a85f76114367f
 
         return $this;
     }
 
     /**
+<<<<<<< HEAD
      * Remove clickLog
      *
      * @param \App\Entity\ClickLog $clickLog
@@ -246,5 +243,17 @@ abstract class QRCode implements \JsonSerializable
     public function getClickLog()
     {
         return $this->clickLog;
+=======
+     * Set pathAdmin
+     *
+     * @param string $pathAdmin
+     * @return Like
+     */
+    public function setPathAdmin($pathAdmin)
+    {
+        $this->pathAdmin = $this->prefix . $pathAdmin;
+
+        return $this;
+>>>>>>> df34ec60a4b0cfb427fc2b1c465a85f76114367f
     }
 }

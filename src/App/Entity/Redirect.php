@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping;
  */
 class Redirect extends QRCode
 {
-    const prefix = "redirect";
+    protected $prefix = "redirect";
 
     /**
      * @var string

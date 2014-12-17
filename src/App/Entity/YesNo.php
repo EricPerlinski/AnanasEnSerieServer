@@ -11,8 +11,8 @@ use Doctrine\ORM\Mapping;
  */
 class YesNo extends QRCode
 {
-    const prefix = "yes";
-    const noPrefix = "no";
+    protected $prefix = "yes";
+    protected $noPrefix = "no";
 
     /**
      * @var string

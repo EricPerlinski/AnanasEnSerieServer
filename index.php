@@ -5,6 +5,7 @@ use Bridge\Doctrine\EntityManager as EM;
 use App\Entity\QRCode as QRCode;
 use App\Entity\Like as Like;
 use App\Entity\Redirect as Redirect;
+use App\Entity\ClickLog as ClickLog;
 
 require 'vendor/autoload.php';
 
@@ -55,6 +56,9 @@ $app->get('/like/:path', function ($path) use($app,$twig,$em){
 		}
 		$qr = $qr[0];
 		$qr->increment();
+		$cl = new ClickLog();
+		$em->persist($cl);
+		$qr->addClickLog($cl);
 		$em->persist($qr);
 		$em->flush();
 
@@ -224,18 +228,3 @@ $app->get('/api/admin/get/:pathAdmin', function ($pathAdmin) use($app,$twig,$em)
 
 
 $app->run();
-
-//mini manuel d utilisation d entity manager
-// pour creer l'em
-// $em = new EM($app)->getEntityManager();
-// pour recuperer un repository avec des fonctions toutes faites
-// $em->getRepository('Machin')->findBy(array('email' => $email, 'pw' => $pswd));
-// pour recuperer par ID
-// $em->getRepository('Machin')->findById(4);
-// pour recuperer tout
-// $em->getRepository('Machin')->findAll();
-// pour enregistrer
-// $em->persist($machin)
-// $em->flush();
-//de memoire machin a son id qui a ete mis a jour apres le flush, mais pas sur
-//dans tous les cas il y a moyen de le recuperer

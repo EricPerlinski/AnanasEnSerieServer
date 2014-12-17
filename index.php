@@ -83,7 +83,7 @@ $app->get('/redirect/:path', function ($path) use($app,$twig,$em){
 	}
 	$qr = $qr[0];
 
-	if($vote){
+	if(!$vote){
 		$qr->increment();
 	}
 

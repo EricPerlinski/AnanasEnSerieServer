@@ -196,7 +196,6 @@ abstract class QRCode implements \JsonSerializable
                         'counter'   =>  $this->counter);
     }
 
-<<<<<<< HEAD
     /**
      * Add clickLog
      *
@@ -206,8 +205,7 @@ abstract class QRCode implements \JsonSerializable
     public function addClickLog(\App\Entity\ClickLog $clickLog)
     {
         $this->clickLog[] = $clickLog;
-=======
-
+    }
 
 
      /**
@@ -219,13 +217,10 @@ abstract class QRCode implements \JsonSerializable
     public function setPath($path)
     {
         $this->path = $this->prefix . $path;
->>>>>>> df34ec60a4b0cfb427fc2b1c465a85f76114367f
-
         return $this;
     }
 
     /**
-<<<<<<< HEAD
      * Remove clickLog
      *
      * @param \App\Entity\ClickLog $clickLog
@@ -236,14 +231,6 @@ abstract class QRCode implements \JsonSerializable
     }
 
     /**
-     * Get clickLog
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getClickLog()
-    {
-        return $this->clickLog;
-=======
      * Set pathAdmin
      *
      * @param string $pathAdmin
@@ -254,6 +241,16 @@ abstract class QRCode implements \JsonSerializable
         $this->pathAdmin = $this->prefix . $pathAdmin;
 
         return $this;
->>>>>>> df34ec60a4b0cfb427fc2b1c465a85f76114367f
     }
+
+    /**
+     * Get clickLog
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getClickLog()
+    {
+        return $this->clickLog;
+    }
+
 }

@@ -218,7 +218,7 @@ $app->post('/api/admin/add/redirect', function () use($app,$twig,$em){
 
 })->name('addLike');
 
-$app->post('/api/admin/add/redirect', function () use($app,$twig,$em){
+$app->post('/api/admin/add/yesno', function () use($app,$twig,$em){
     //traitement des params POST
 
 	$json;

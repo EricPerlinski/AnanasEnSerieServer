@@ -70,14 +70,18 @@
 *** TODO faire les sondages evolués
 **** TODO oui/non
 **** TODO sondage
-*** TODO CSS, JS, ...
 *** TODO securiser avec des .htacces, ...
 ** Problèmes
 ** Ce qu'il reste a faire
 ** Indicateurs projet
+*** nombre de taches effectuees 27
+*** nombre de post-it utilises 40
+*** nombre de commits 247
+*** nombre d'ananas consommes 3
 
 * <2014-12-19 ven.>
 ** Ce qui doit etre fait
+*** TODO CSS, JS, ...
 ** Problèmes
 ** Ce qu'il reste a faire
 ** Indicateurs projet

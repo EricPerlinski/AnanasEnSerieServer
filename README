@@ -2,7 +2,9 @@ Ce dépôt concerne le serveur PHP.
 Le dépôt correspondant au client est disponnible à l'adresse suivante :
 https://bitbucket.org/telecomnancy/codingweek_prj11-client
 
-Url disponnibles RELEASE_DAY_3 :
+Url disponnibles RELEASE_DAY_2 :
+
+
 
 
 
@@ -13,13 +15,20 @@ Url disponnibles RELEASE_DAY_3 :
 
 - /like/path :  permet d'incrementer le nombre de vues d'un QRCode de type "like" et d'afficher un message de remerciement.
 
-#### NEW ####
+- /admin/get/like/pathAdmin : permet de voir le nombre de votes d'un QRCode de type "like".
+
+** API
+
+- /api/admin/add/like : qui prend en paramètres POST un "object", qui sera un objet "Like". Retourne le path et pathAdmin du sondage.
+
+
+Url disponnibles RELEASE_DAY_3 :
+
+
+** WEB
+
 - /redirect/path :  permet d'incrementer le nombre de vues d'un QRCode de type "redirect" et de rediriger vers le site enregistré dans le QRCode.
 
-
-- /admin/get/flash/pathAdmin : permet de voir le nombre de votes d'un QRCode de type "like".
-
-#### NEW ####
 - /admin/get/redirect/pathAdmin : permet de voir le nombre de votes d'un QRCode de type "redirect".
 
 
@@ -34,8 +43,6 @@ Url disponnibles RELEASE_DAY_3 :
 - /api/admin/add/redirect : qui prend en paramètres POST un "object", qui sera un objet "Redirect". Retourne le path et pathAdmin du sondage.
 
 - /api/test : retourne le texte "ananas" afin de tester dans le client si l'url du serveur est correct.
-
-
 
 
 

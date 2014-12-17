@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping;
  */
 class Survey extends QRCode
 {
-    const prefix = "survey";
+    protected $prefix = "survey";
 
     /**
      * @ManyToMany(targetEntity="Question")

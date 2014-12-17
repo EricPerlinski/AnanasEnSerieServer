@@ -119,7 +119,7 @@ $app->get('/admin/get/like/:pathAdmin', function ($pathAdmin) use($app,$twig,$em
 	//RENDER
 	$title = $qr->getTitle();
 	$counter = $qr->getCounter();
-	echo $twig->render('resultat.php',array('name'=> $title, 'counter' => $counter ));	
+	echo $twig->render('adminLike.php',array('name'=> $title, 'counter' => $counter ));	
 	$app->response->setStatus(200);
 
 })->name('adminLike')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);

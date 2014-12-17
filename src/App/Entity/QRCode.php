@@ -217,6 +217,7 @@ abstract class QRCode implements \JsonSerializable
     public function setPath($path)
     {
         $this->path = $path;
+
         return $this;
     }
 

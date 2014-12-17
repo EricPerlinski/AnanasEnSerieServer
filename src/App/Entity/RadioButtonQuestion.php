@@ -24,7 +24,7 @@ class RadioButtonQuestion extends Question
 	/**
      * @ManyToMany(targetEntity="Item")
      * @JoinTable(name="radiobutton_items",
-     *      joinColumns={@JoinColumn(name="radiobutton_id", referencedColumnName="id")},
+     *      joinColumns={@JoinColumn(name="radiobutton_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@JoinColumn(name="item_id", referencedColumnName="id", unique=true)}
      *      )
      **/

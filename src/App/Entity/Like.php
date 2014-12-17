@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping;
 
 /**
  * @Entity
- * @Table(name="like")
+ * @Table(name="likable")
  */
 class Like extends QRCode
 {

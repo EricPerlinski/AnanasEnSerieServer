@@ -12,6 +12,14 @@ use Doctrine\ORM\Mapping;
 class YesNo extends QRCode
 {
     const prefix = "yes";
+    const noPrefix = "no";
+
+    /**
+     * @var string
+     *
+     * @Column(name="nopath", type="string", length=255)
+     */
+    private $noPath;
 
     /**
      * Set path
@@ -23,6 +31,7 @@ class YesNo extends QRCode
     {
         parent::setPath($path);
         $this->path = self::prefix . $this->path;
+        $this->noPath = self::noPrefix . $this->path;
 
         return $this;
     }
@@ -41,4 +50,27 @@ class YesNo extends QRCode
         return $this;
     }
 
+
+    /**
+     * Set noPath
+     *
+     * @param string $noPath
+     * @return YesNo
+     */
+    private function setNoPath($noPath)
+    {
+        $this->noPath = $noPath;
+
+        return $this;
+    }
+
+    /**
+     * Get noPath
+     *
+     * @return string 
+     */
+    public function getNoPath()
+    {
+        return $this->noPath;
+    }
 }

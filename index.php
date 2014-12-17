@@ -3,6 +3,9 @@
 use Bridge\Doctrine\EntityManager as EM;
 
 use App\Entity\QRCode as QRCode;
+use App\Entity\Like as Like;
+use App\Entity\Redirect as Redirect;
+use App\Entity\ClickLog as ClickLog;
 
 require 'vendor/autoload.php';
 
@@ -53,6 +56,9 @@ $app->get('/like/:path', function ($path) use($app,$twig,$em){
 		}
 		$qr = $qr[0];
 		$qr->increment();
+		$cl = new ClickLog();
+		$em->persist($cl);
+		$qr->addClickLog($cl);
 		$em->persist($qr);
 		$em->flush();
 
@@ -68,8 +74,33 @@ $app->get('/like/:path', function ($path) use($app,$twig,$em){
 
 })->name('like')->conditions(['path' => '[0-9a-zA-Z]+']);
 
+$app->get('/redirect/:path', function ($path) use($app,$twig,$em){
 
-$app->get('/admin/get/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
+	$vote = $app->getCookie("$path");
+	$qr = $em->getRepository("App\Entity\QRCode")->findBy(array('path' => $path));
+	if(count($qr)!=1){
+		$app->notFound();
+	}
+	$qr = $qr[0];
+
+	if($vote){
+		$qr->increment();
+	}
+
+	$em->persist($qr);
+	$em->flush();
+
+	$app->setCookie("$path",true);
+
+	$app->redirect($qr->getUrl());
+	$app->response->setStatus(200);
+	
+})->name('redirect')->conditions(['path' => '[0-9a-zA-Z]+']);
+
+
+
+
+$app->get('/admin/get/like/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
 
 	$qr = $em->getRepository("App\Entity\QRCode")->findBy(array('pathAdmin' => $pathAdmin));
 	if(count($qr)!=1){
@@ -82,7 +113,23 @@ $app->get('/admin/get/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
 	echo $twig->render('resultat.php',array('name'=> $title, 'counter' => $counter ));	
 	$app->response->setStatus(200);
 
-})->name('viewAdmin')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
+})->name('adminLike')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
+
+
+$app->get('/admin/get/redirect/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
+
+	$qr = $em->getRepository("App\Entity\QRCode")->findBy(array('pathAdmin' => $pathAdmin));
+	if(count($qr)!=1){
+		$app->notFound();
+	}
+	$qr = $qr[0];
+	//RENDER
+	$title = $qr->getTitle();
+	$counter = $qr->getCounter();
+	echo $twig->render('redirect.php',array('name'=> $title, 'counter' => $counter ));	
+	$app->response->setStatus(200);
+
+})->name('adminRedirect')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
 
 
 /*****************/
@@ -94,20 +141,21 @@ $app->get('/api/test', function(){
 })->name('test');
 
 
-$app->post('/api/admin/add', function () use($app,$twig,$em){
+$app->post('/api/admin/add/like', function () use($app,$twig,$em){
     //traitement des params POST
-	$title;
-	if(isset($_POST['title'])){
-		$title = $_POST['title'];
-	}else{
+
+	$json;
+	if(isset($_POST['objet'])){
+		$json = $_POST['objet'];
+	}else{ 
 		$app->notFound();
 	}
 
-	$qr = new QRCode();
-	$qr->setTitle($title);
+	$obj = json_decode($json,true);
+	$qr = new Like();
+	$qr->setTitle($obj['title']);
 	$qr->setPath(rand(1,1000));
 	$qr->setPathAdmin(rand(1,1000));
-	
 	$em->persist($qr);
 	$em->flush();
 
@@ -124,10 +172,42 @@ $app->post('/api/admin/add', function () use($app,$twig,$em){
 	echo "[{\"path\":\"$path\",\"pathAdmin\":\"$pathAdmin\"}]";
 	$app->response->setStatus(200);
 
-})->name('add');
+})->name('addLike');
 
 
+$app->post('/api/admin/add/redirect', function () use($app,$twig,$em){
+    //traitement des params POST
 
+	$json;
+	if(isset($_POST['objet'])){
+		$json = $_POST['objet'];
+	}else{ 
+		$app->notFound();
+	}
+
+	$obj = json_decode($json,true);
+	$qr = new Redirect();
+	$qr->setTitle($obj['title']);
+	$qr->setUrl($obj['url']);
+	$qr->setPath(rand(1,1000));
+	$qr->setPathAdmin(rand(1,1000));
+	$em->persist($qr);
+	$em->flush();
+
+	$qr->setPath(hash('crc32b', $qr->getCreationDate()->format('Y-m-d H:i:s') . $qr->getId()) . $qr->getId());
+	$qr->setPathAdmin(hash('crc32b', $qr->getCreationDate()->format('Y-m-d H:i:s') . 'admin' . $qr->getId()) . $qr->getId());
+	$em->persist($qr);
+	$em->flush();
+
+	
+	//RENDER
+	$id=$qr->getId();
+	$path=$qr->getPath();
+	$pathAdmin=$qr->getPathAdmin();
+	echo "[{\"path\":\"$path\",\"pathAdmin\":\"$pathAdmin\"}]";
+	$app->response->setStatus(200);
+
+})->name('addLike');
 
 $app->get('/api/admin/get/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
 
@@ -148,18 +228,3 @@ $app->get('/api/admin/get/:pathAdmin', function ($pathAdmin) use($app,$twig,$em)
 
 
 $app->run();
-
-//mini manuel d utilisation d entity manager
-// pour creer l'em
-// $em = new EM($app)->getEntityManager();
-// pour recuperer un repository avec des fonctions toutes faites
-// $em->getRepository('Machin')->findBy(array('email' => $email, 'pw' => $pswd));
-// pour recuperer par ID
-// $em->getRepository('Machin')->findById(4);
-// pour recuperer tout
-// $em->getRepository('Machin')->findAll();
-// pour enregistrer
-// $em->persist($machin)
-// $em->flush();
-//de memoire machin a son id qui a ete mis a jour apres le flush, mais pas sur
-//dans tous les cas il y a moyen de le recuperer

@@ -69,6 +69,15 @@ abstract class QRCode implements \JsonSerializable
     private $pathAdmin;
 
     /**
+     * @ManyToMany(targetEntity="ClickLog")
+     * @JoinTable(name="qrcode_clicklogs",
+     *      joinColumns={@JoinColumn(name="qrcode_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@JoinColumn(name="clicklog_id", referencedColumnName="id", unique=true)}
+     *      )
+     **/
+    private $clickLog;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -155,7 +164,7 @@ abstract class QRCode implements \JsonSerializable
      */
     public function getPath()
     {
-        return $this->path;
+        return $this->prefix . "/" . $this->path;
     }
 
   
@@ -167,7 +176,7 @@ abstract class QRCode implements \JsonSerializable
      */
     public function getPathAdmin()
     {
-        return $this->pathAdmin;
+        return $this->prefix . "/" . $this->pathAdmin;
     }
 
 
@@ -187,7 +196,16 @@ abstract class QRCode implements \JsonSerializable
                         'counter'   =>  $this->counter);
     }
 
-
+    /**
+     * Add clickLog
+     *
+     * @param \App\Entity\ClickLog $clickLog
+     * @return QRCode
+     */
+    public function addClickLog(\App\Entity\ClickLog $clickLog)
+    {
+        $this->clickLog[] = $clickLog;
+    }
 
 
      /**
@@ -198,9 +216,19 @@ abstract class QRCode implements \JsonSerializable
      */
     public function setPath($path)
     {
-        $this->path = $this->prefix . $path;
+        $this->path = $path;
 
         return $this;
+    }
+
+    /**
+     * Remove clickLog
+     *
+     * @param \App\Entity\ClickLog $clickLog
+     */
+    public function removeClickLog(\App\Entity\ClickLog $clickLog)
+    {
+        $this->clickLog->removeElement($clickLog);
     }
 
     /**
@@ -211,8 +239,19 @@ abstract class QRCode implements \JsonSerializable
      */
     public function setPathAdmin($pathAdmin)
     {
-        $this->pathAdmin = $this->prefix . $pathAdmin;
+        $this->pathAdmin = $pathAdmin;
 
         return $this;
     }
+
+    /**
+     * Get clickLog
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getClickLog()
+    {
+        return $this->clickLog;
+    }
+
 }

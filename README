@@ -32,5 +32,6 @@ Fichiers liés :
 
 - INSTALL permet de spécifier comment installer le projet.
 - journal.org indique les tâches restantes, et donne des indicateurs projet.
-- contributors.txt contient la liste des membres ayqnt participé à ce projet.
+- contributors.txt contient la liste des membres ayant participé à ce projet.
 - le dossier conception contient des documents présentant la conception de notre application.
+- le fichier rapport-test.odt indique quels tests ont été effectués pour le projet (le responsable qualité de ce projet est Nicolas Viard).

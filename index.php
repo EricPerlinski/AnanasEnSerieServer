@@ -39,7 +39,7 @@ $app->get('/', function () use($app,$twig){
 
 
 
-$app->get('/flash/:path', function ($path) use($app,$twig,$em){
+$app->get('/like/:path', function ($path) use($app,$twig,$em){
 
 	$vote = $app->getCookie("$path");
 	if($vote){
@@ -62,11 +62,11 @@ $app->get('/flash/:path', function ($path) use($app,$twig,$em){
 		$title = $qr->getTitle();
 		$counter = $qr->getCounter();
 
-		echo $twig->render('flash.php',array('name' => $title , 'counter' => $counter));
+		echo $twig->render('like.php',array('name' => $title , 'counter' => $counter));
 		$app->response->setStatus(200);
 	}
 
-})->name('flash')->conditions(['path' => '[0-9a-zA-Z]+']);
+})->name('like')->conditions(['path' => '[0-9a-zA-Z]+']);
 
 
 $app->get('/admin/get/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){

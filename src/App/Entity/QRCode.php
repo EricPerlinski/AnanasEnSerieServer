@@ -8,8 +8,11 @@ use Doctrine\ORM\Mapping;
 /**
  * @Entity
  * @Table(name="qrcode")
+ * @InheritanceType("JOINED")
+ * @DiscriminatorColumn(name="discr", type="string")
+ * @DiscriminatorMap({"redirect" = "Redirect", "yesno" = "YesNo", "like" = "Like", "survey" = "Survey"})
  */
-class QRCode implements \JsonSerializable
+abstract class QRCode implements \JsonSerializable
 {
 
     public function __construct(){

@@ -21,35 +21,6 @@ class YesNo extends QRCode
      */
     private $noPath;
 
-    /**
-     * Set path
-     *
-     * @param string $path
-     * @return YesNo
-     */
-    public function setPath($path)
-    {
-        parent::setPath($path);
-        $this->path = self::prefix  . '/' .  $this->path;
-        $this->noPath = self::noPrefix  . '/' .  $this->path;
-
-        return $this;
-    }
-
-    /**
-     * Set pathAdmin
-     *
-     * @param string $pathAdmin
-     * @return YesNo
-     */
-    public function setPathAdmin($pathAdmin)
-    {
-        parent::setPathAdmin($path);
-        $this->path = self::prefix . $this->pathAdmin;
-
-        return $this;
-    }
-
 
     /**
      * Set noPath

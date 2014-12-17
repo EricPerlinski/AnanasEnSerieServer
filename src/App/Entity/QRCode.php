@@ -15,6 +15,10 @@ use Doctrine\ORM\Mapping;
 abstract class QRCode implements \JsonSerializable
 {
 
+
+    protected $prefix;
+
+
     public function __construct(){
         $this->counter = 0;
         $this->creationDate = new \DateTime();
@@ -143,18 +147,6 @@ abstract class QRCode implements \JsonSerializable
         return $this->creationDate;
     }
 
-    /**
-     * Set path
-     *
-     * @param string $path
-     * @return QRCode
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
 
     /**
      * Get path
@@ -166,18 +158,7 @@ abstract class QRCode implements \JsonSerializable
         return $this->path;
     }
 
-    /**
-     * Set pathAdmin
-     *
-     * @param string $pathAdmin
-     * @return QRCode
-     */
-    public function setPathAdmin($pathAdmin)
-    {
-        $this->pathAdmin = $pathAdmin;
-
-        return $this;
-    }
+  
 
     /**
      * Get pathAdmin
@@ -204,5 +185,34 @@ abstract class QRCode implements \JsonSerializable
                         'pathAdmin' =>  $this->pathAdmin,
                         'title'     =>  $this->title,
                         'counter'   =>  $this->counter);
+    }
+
+
+
+
+     /**
+     * Set path
+     *
+     * @param string $path
+     * @return Like
+     */
+    public function setPath($path)
+    {
+        $this->path = $this->prefix . $path;
+
+        return $this;
+    }
+
+    /**
+     * Set pathAdmin
+     *
+     * @param string $pathAdmin
+     * @return Like
+     */
+    public function setPathAdmin($pathAdmin)
+    {
+        $this->pathAdmin = $this->prefix . $pathAdmin;
+
+        return $this;
     }
 }

@@ -164,7 +164,7 @@ abstract class QRCode implements \JsonSerializable
      */
     public function getPath()
     {
-        return $this->path;
+        return $this->prefix . "/" . $this->path;
     }
 
   
@@ -176,7 +176,7 @@ abstract class QRCode implements \JsonSerializable
      */
     public function getPathAdmin()
     {
-        return $this->pathAdmin;
+        return $this->prefix . "/" . $this->pathAdmin;
     }
 
 
@@ -216,7 +216,7 @@ abstract class QRCode implements \JsonSerializable
      */
     public function setPath($path)
     {
-        $this->path = $this->prefix . $path;
+        $this->path = $path;
         return $this;
     }
 
@@ -238,7 +238,7 @@ abstract class QRCode implements \JsonSerializable
      */
     public function setPathAdmin($pathAdmin)
     {
-        $this->pathAdmin = $this->prefix . $pathAdmin;
+        $this->pathAdmin = $pathAdmin;
 
         return $this;
     }

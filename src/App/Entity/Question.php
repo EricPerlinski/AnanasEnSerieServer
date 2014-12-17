@@ -8,6 +8,9 @@ use Doctrine\ORM\Mapping;
 /**
  * @Entity
  * @Table(name="question")
+ * @InheritanceType("JOINED")
+ * @DiscriminatorColumn(name="discr", type="string")
+ * @DiscriminatorMap({"openquestion" = "OpenQuestion", "radiobuttonquestion" = "RadioButtonQuestion", "checkboxquestion" = "CheckboxQuestion"})
  */
 abstract class Question implements \JsonSerializable
 {
@@ -29,5 +32,9 @@ abstract class Question implements \JsonSerializable
     public function getId()
     {
         return $this->id;
+    }
+
+    public function jsonSerialize() {
+        return array();
     }
 }

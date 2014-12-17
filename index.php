@@ -5,6 +5,7 @@ use Bridge\Doctrine\EntityManager as EM;
 use App\Entity\QRCode as QRCode;
 use App\Entity\Like as Like;
 use App\Entity\Redirect as Redirect;
+use App\Entity\YesNo as YesNo;
 use App\Entity\ClickLog as ClickLog;
 
 require 'vendor/autoload.php';
@@ -100,12 +101,67 @@ $app->get('/redirect/:path', function ($path) use($app,$twig,$em){
 	
 })->name('redirect')->conditions(['path' => '[0-9a-zA-Z]+']);
 
+
+
 $app->get('/yes/:path', function ($path) use($app,$twig,$em){
-	
+	$vote = $app->getCookie("$path");
+	if($vote){
+		echo "Vous avez déjà voté";
+		$app->response->setStatus(200);
+	}else{
+
+		$qr = $em->getRepository("App\Entity\QRCode")->findBy(array('path' => $path));
+		if(count($qr)!=1){
+			$app->notFound();
+		}
+		$qr = $qr[0];
+		$qr->increment();
+		$cl = new ClickLog();
+		$em->persist($cl);
+		$qr->addClickLog($cl);
+		$em->persist($qr);
+		$em->flush();
+
+		$app->setCookie("$path",true);
+
+		//Render
+		$title = $qr->getTitle();
+		$counter = $qr->getCounter();
+
+		echo $twig->render('yes.php',array('name' => $title , 'counter' => $counter));
+		$app->response->setStatus(200);
+	}
 })->name('yes')->conditions(['path' => '[0-9a-zA-Z]+']);
 
 $app->get('/no/:path', function ($path) use($app,$twig,$em){
-	
+	$vote = $app->getCookie("$path");
+	if($vote){
+		echo "Vous avez déjà voté";
+		$app->response->setStatus(200);
+	}else{
+
+		$qr = $em->getRepository("App\Entity\QRCode")->findBy(array('path' => $path));
+		if(count($qr)!=1){
+			$app->notFound();
+		}
+		$qr = $qr[0];
+		$qr->increment();
+		$qr->incrementNo();
+		$cl = new ClickLog();
+		$em->persist($cl);
+		$qr->addClickLogNo($cl);
+		$em->persist($qr);
+		$em->flush();
+
+		$app->setCookie("$path",true);
+
+		//Render
+		$title = $qr->getTitle();
+		$counter = $qr->getCounter();
+
+		echo $twig->render('no.php',array('name' => $title , 'counter' => $counter));
+		$app->response->setStatus(200);
+	}
 })->name('no')->conditions(['path' => '[0-9a-zA-Z]+']);
 
 
@@ -135,11 +191,27 @@ $app->get('/admin/get/redirect/:pathAdmin', function ($pathAdmin) use($app,$twig
 	//RENDER
 	$title = $qr->getTitle();
 	$counter = $qr->getCounter();
-	echo $twig->render('redirect.php',array('name'=> $title, 'counter' => $counter ));	
+	echo $twig->render('adminRedirect.php',array('name'=> $title, 'counter' => $counter ));	
 	$app->response->setStatus(200);
 
 })->name('adminRedirect')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
 
+
+$app->get('/admin/get/yesno/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
+
+	$qr = $em->getRepository("App\Entity\QRCode")->findBy(array('pathAdmin' => $pathAdmin));
+	if(count($qr)!=1){
+		$app->notFound();
+	}
+	$qr = $qr[0];
+	//RENDER
+	$title = $qr->getTitle();
+	$counter = $qr->getCounter();
+	$counterNo = $qr->getCounterNo();
+	echo $twig->render('adminYesNo.php',array('name'=> $title, 'counter' => $counter, 'counterNo' => $counterNo ));	
+	$app->response->setStatus(200);
+
+})->name('adminLike')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
 
 /*****************/
 /****** API ******/
@@ -230,12 +302,15 @@ $app->post('/api/admin/add/yesno', function () use($app,$twig,$em){
 
 	$obj = json_decode($json,true);
 	$qr = new YesNo();
+	$qr->setCounter(0);
+	$qr->setCounterNo(0);
 	$qr->setTitle($obj['title']);
+	$qr->setQuestion($obj['question']);
 	$qr->setPath(rand(1,1000));
 	$qr->setPathAdmin(rand(1,1000));
 	$em->persist($qr);
-	$em->flush();
 
+	$em->flush();
 	$qr->setPath(hash('crc32b', $qr->getCreationDate()->format('Y-m-d H:i:s') . $qr->getId()) . $qr->getId());
 	$qr->setPathAdmin(hash('crc32b', $qr->getCreationDate()->format('Y-m-d H:i:s') . 'admin' . $qr->getId()) . $qr->getId());
 	$em->persist($qr);
@@ -244,12 +319,15 @@ $app->post('/api/admin/add/yesno', function () use($app,$twig,$em){
 	
 	//RENDER
 	$id=$qr->getId();
-	$path=$qr->getPath();
+	$yespath=$qr->getPath();
+	$nopath=$qr->getNoPath();
 	$pathAdmin=$qr->getPathAdmin();
-	echo "[{\"path\":\"$path\",\"pathAdmin\":\"$pathAdmin\"}]";
+	echo "[{\"path\":\"$yespath\",\"nopath\":\"$nopath\",\"pathAdmin\":\"$pathAdmin\"}]";
 	$app->response->setStatus(200);
 
 })->name('addYesno');
+
+
 
 $app->get('/api/admin/get/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
 

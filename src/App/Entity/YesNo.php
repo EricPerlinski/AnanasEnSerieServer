@@ -31,19 +31,27 @@ class YesNo extends QRCode
     private $clickLogNo;
 
     /**
+     * @var string
+     *
+     * @Column(name="question", type="string", length=255)
+     */
+    private $question;
+
+    /**
      * Get noPath
      *
      * @return string 
      */
     public function getNoPath()
     {
-        return $this->noPrefix . "/" . $this->path;
+        return $this->noPrefix . "/" . $this->getPath();
     }
     /**
      * Constructor
      */
     public function __construct()
     {
+        parent::__construct();
         $this->clickLogNo = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -101,5 +109,37 @@ class YesNo extends QRCode
     public function getClickLogNo()
     {
         return $this->clickLogNo;
+    }
+
+    /**
+     * Set question
+     *
+     * @param string $question
+     * @return YesNo
+     */
+    public function setQuestion($question)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return string 
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
+    * Increment counterNo
+    *
+    */
+    public function incrementNo()
+    {
+        $this->counterNo++;
     }
 }

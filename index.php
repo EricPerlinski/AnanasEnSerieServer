@@ -3,6 +3,7 @@
 use Bridge\Doctrine\EntityManager as EM;
 
 use App\Entity\QRCode as QRCode;
+use App\Entity\Like as Like;
 
 require 'vendor/autoload.php';
 
@@ -69,7 +70,9 @@ $app->get('/like/:path', function ($path) use($app,$twig,$em){
 })->name('like')->conditions(['path' => '[0-9a-zA-Z]+']);
 
 
-$app->get('/admin/get/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
+
+
+$app->get('/admin/get/like/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
 
 	$qr = $em->getRepository("App\Entity\QRCode")->findBy(array('pathAdmin' => $pathAdmin));
 	if(count($qr)!=1){
@@ -82,7 +85,7 @@ $app->get('/admin/get/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
 	echo $twig->render('resultat.php',array('name'=> $title, 'counter' => $counter ));	
 	$app->response->setStatus(200);
 
-})->name('viewAdmin')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
+})->name('adminLike')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
 
 
 /*****************/
@@ -94,20 +97,21 @@ $app->get('/api/test', function(){
 })->name('test');
 
 
-$app->post('/api/admin/add', function () use($app,$twig,$em){
+$app->post('/api/admin/add/like', function () use($app,$twig,$em){
     //traitement des params POST
-	$title;
-	if(isset($_POST['title'])){
-		$title = $_POST['title'];
-	}else{
+
+	$json;
+	if(isset($_POST['objet'])){
+		$json = $_POST['objet'];
+	}else{ 
 		$app->notFound();
 	}
 
-	$qr = new QRCode();
-	$qr->setTitle($title);
+	$obj = json_decode($json,true);
+	$qr = new Like();
+	$qr->setTitle($obj['title']);
 	$qr->setPath(rand(1,1000));
 	$qr->setPathAdmin(rand(1,1000));
-	
 	$em->persist($qr);
 	$em->flush();
 
@@ -124,7 +128,7 @@ $app->post('/api/admin/add', function () use($app,$twig,$em){
 	echo "[{\"path\":\"$path\",\"pathAdmin\":\"$pathAdmin\"}]";
 	$app->response->setStatus(200);
 
-})->name('add');
+})->name('addLike');
 
 
 

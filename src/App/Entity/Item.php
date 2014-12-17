@@ -24,7 +24,7 @@ abstract class Item implements \JsonSerializable
     /**
      * @var string
      *
-     * @Column(name="path", type="string", length=255)
+     * @Column(name="text", type="string", length=255)
      */
     private $text;
 

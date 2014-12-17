@@ -25,6 +25,13 @@ abstract class Question implements \JsonSerializable
     private $id;
 
     /**
+     * @var string
+     *
+     * @Column(name="text", type="string", length=255)
+     */
+    private $text;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -36,5 +43,28 @@ abstract class Question implements \JsonSerializable
 
     public function jsonSerialize() {
         return array();
+    }
+
+    /**
+     * Set text
+     *
+     * @param string $text
+     * @return Question
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+
+        return $this;
+    }
+
+    /**
+     * Get text
+     *
+     * @return string 
+     */
+    public function getText()
+    {
+        return $this->text;
     }
 }

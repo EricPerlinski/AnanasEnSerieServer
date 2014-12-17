@@ -20,7 +20,7 @@ class CheckboxQuestion extends Question
 	/**
      * @ManyToMany(targetEntity="Item")
      * @JoinTable(name="checkbox_items",
-     *      joinColumns={@JoinColumn(name="checkbox_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      joinColumns={@JoinColumn(name="checkbox_id", referencedColumnName="id", onDelete="CASCADE"	)},
      *      inverseJoinColumns={@JoinColumn(name="item_id", referencedColumnName="id", unique=true)}
      *      )
      **/

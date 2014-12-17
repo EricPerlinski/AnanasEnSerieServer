@@ -30,8 +30,8 @@ class YesNo extends QRCode
     public function setPath($path)
     {
         parent::setPath($path);
-        $this->path = self::prefix . $this->path;
-        $this->noPath = self::noPrefix . $this->path;
+        $this->path = self::prefix  . '/' .  $this->path;
+        $this->noPath = self::noPrefix  . '/' .  $this->path;
 
         return $this;
     }

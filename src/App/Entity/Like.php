@@ -36,7 +36,7 @@ class Like extends QRCode
     public function setPathAdmin($pathAdmin)
     {
         parent::setPathAdmin($path);
-        $this->path = self::prefix . $this->pathAdmin;
+        $this->path = self::prefix . '/' . $this->pathAdmin;
 
         return $this;
     }

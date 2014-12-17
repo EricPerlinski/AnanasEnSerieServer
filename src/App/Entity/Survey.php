@@ -31,7 +31,7 @@ class Survey extends QRCode
     public function setPath($path)
     {
         parent::setPath($path);
-        $this->path = self::prefix . $this->path;
+        $this->path = self::prefix  . '/' .  $this->path;
 
         return $this;
     }

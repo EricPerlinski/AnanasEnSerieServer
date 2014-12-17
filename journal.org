@@ -45,23 +45,33 @@
 
 * <2014-12-17 mer.>
 ** Ce qui doit etre fait
-*** TODO creer un .htaccess pour des problèmes de sécurité inter-étudiants
-*** TODO creer une url de test de l'API
-*** TODO verifier l'url de test de l'API
+*** DONE creer une url de test de l'API
+*** DONE verifier l'url de test de l'API
 *** TODO Faire un login
-*** TODO securiser avec des .htacces, ...
-*** TODO verifier si l'appli android fait 2 fois la connexion
-*** TODO CSS, JS, ...
+*** DONE verifier si l'appli android fait 2 fois la connexion
 *** TODO MVC refactoring pour le client Java
-*** TODO Reflechir sur des sondages plus évolué
+*** DONE Reflechir sur des sondages plus évolué
+*** TODO Implementer les sondages evolués
+**** DONE Like
+**** DONE redirection
 ** Problèmes
 ** Ce qu'il reste a faire
+*** oui/non
+*** sondage
 ** Indicateurs projet
-
+*** Nombre de tâches effectuées
+*** Nombre de Post-it utilisés 40
+*** Nombre de commits effectués 
+*** Nombre d'ananas consommés 1
+*** Nombre total d'ananas consommés 3  
 * <2014-12-18 jeu.>
 ** Ce qui doit etre fait
 *** TODO faire des stats avancés (par rapport aux heure, ...)
-*** TODO faire des sondages evolués
+*** TODO faire les sondages evolués
+**** TODO oui/non
+**** TODO sondage
+*** TODO CSS, JS, ...
+*** TODO securiser avec des .htacces, ...
 ** Problèmes
 ** Ce qu'il reste a faire
 ** Indicateurs projet

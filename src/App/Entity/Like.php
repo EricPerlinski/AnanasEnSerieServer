@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping;
  */
 class Like extends QRCode
 {
-    private const prefix = "like";
+    const prefix = "like";
 
     /**
      * Set path

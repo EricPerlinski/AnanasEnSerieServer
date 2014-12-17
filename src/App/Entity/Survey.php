@@ -16,7 +16,7 @@ class Survey extends QRCode
     /**
      * @ManyToMany(targetEntity="Question")
      * @JoinTable(name="survey_questions",
-     *      joinColumns={@JoinColumn(name="survey_id", referencedColumnName="id")},
+     *      joinColumns={@JoinColumn(name="survey_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@JoinColumn(name="question_id", referencedColumnName="id", unique=true)}
      *      )
      **/

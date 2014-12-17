@@ -7,12 +7,9 @@ use Doctrine\ORM\Mapping;
 
 /**
  * @Entity
- * @Table(name="question")
- * @InheritanceType("JOINED")
- * @DiscriminatorColumn(name="discr", type="string")
- * @DiscriminatorMap({"openquestion" = "OpenQuestion", "radiobuttonquestion" = "RadioButtonQuestion", "checkboxquestion" = "CheckboxQuestion"})
+ * @Table(name="item")
  */
-abstract class Question implements \JsonSerializable
+abstract class Item implements \JsonSerializable
 {
 
     /**
@@ -49,7 +46,7 @@ abstract class Question implements \JsonSerializable
      * Set text
      *
      * @param string $text
-     * @return Question
+     * @return Item
      */
     public function setText($text)
     {

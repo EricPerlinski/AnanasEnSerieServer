@@ -44,7 +44,7 @@ class YesNo extends QRCode
      */
     public function getNoPath()
     {
-        return $this->noPrefix . "/" . substr($this->getPath(), strlen($this->prefix));
+        return $this->noPrefix . substr($this->getPath(), strlen($this->prefix));
     }
     /**
      * Constructor

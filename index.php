@@ -47,7 +47,7 @@ $em  = $em->getEntityManager();
 /*****************/
 
 $app->get('/', function () use($app,$twig){
-	echo $twig->render('index.php', array('flash' => $_SESSION['slim.flash'] ));
+	echo $twig->render('index.php', array('flash' => isset($_SESSION['slim.flash']) ? $_SESSION['slim.flash'] : null ));
 })->name('home');
 
 
@@ -224,7 +224,11 @@ $app->get('/admin/get/redirect/:pathAdmin', function ($pathAdmin) use($app,$twig
 	$title = $qr->getTitle();
 	$counter = $qr->getCounter();
 	$url = $qr->getUrl();
-	echo $twig->render('adminRedirect.php',array('name'=> $title, 'counter' => $counter, 'url' => $url ));	
+	echo $twig->render('adminRedirect.php',array(
+		'name'=> $title, 'counter' => $counter, 'url' => $url ,
+		'target' => $app->urlFor('adminRedirectPOST', array('pathAdmin' => $pathAdmin)), 
+		'flash' => isset($_SESSION['slim.flash']) ? $_SESSION['slim.flash'] : null)
+	);	
 	$app->response->setStatus(200);
 
 })->name('adminRedirect')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);

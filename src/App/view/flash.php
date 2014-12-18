@@ -7,7 +7,7 @@
 	{% if flash.success %}
 	<div class="alert alert-success alert-dismissable">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		{{ flash.test }}
+		{{ flash.success }}
 	</div>
 	{% endif %}
 	{% if flash.info %}

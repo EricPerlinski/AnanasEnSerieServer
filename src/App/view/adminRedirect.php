@@ -7,7 +7,7 @@
 Il y a {{counter}} redirections pour {{name}}.
 </div>
 <div class="row">
-<form role="form" method="POST" action="c26c676a14">
+<form role="form" method="POST" action="{{ target }}">
   <div class="form-group">
     <label for="url">Destination</label>
     <input type="url" class="form-control" id="url" name='url' placeholder="{{ url }}"/>

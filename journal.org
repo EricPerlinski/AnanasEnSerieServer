@@ -51,7 +51,7 @@
 *** DONE verifier si l'appli android fait 2 fois la connexion
 *** TODO MVC refactoring pour le client Java
 *** DONE Reflechir sur des sondages plus évolué
-*** TODO Implementer les sondages evolués
+*** DONE Implementer les sondages evolués
 **** DONE Like
 **** DONE redirection
 ** Problèmes
@@ -68,7 +68,7 @@
 ** Ce qui doit etre fait
 *** TODO faire des stats avancés (par rapport aux heure, ...)
 *** TODO faire les sondages evolués
-**** TODO oui/non
+**** DONE oui/non
 **** TODO sondage
 *** TODO securiser avec des .htacces, ...
 ** Problèmes

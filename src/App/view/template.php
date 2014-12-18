@@ -3,12 +3,12 @@
 <head>
 	{% block head %}
 	{% block style %}
-		<link rel="stylesheet" href="../asset/css/style.css" />
-		<link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" href="./asset/css/style.css" />
+		<link rel="stylesheet" href="./vendor/twbs/bootstrap/dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="./vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css" />
 	{% endblock %}
 	<title>{% block title %}{% endblock %}</title>
-	<link rel="icon" href="ananas.ico" />
+	<link rel="icon" href="./ananas.ico" />
 	<meta charset="UTF-8">
 	{% endblock %}
 </head>
@@ -16,7 +16,7 @@
 
 	{% block javascript %}
 		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script type="text/javascript" src="../vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="./vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
 	{% endblock %}
 
 	<div id="header">{% include 'header.php' %}</div>	

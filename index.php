@@ -26,7 +26,7 @@ $app = new \Slim\Slim(array(
 	));
 $app->config = require(__DIR__ . '/app/config/config.php');
 
-$app->add(new \Slim\Middleware\SessionCookie());
+$app->add(new \Slim\Middleware\SessionCookie(array()));
 
 $em = new EM($app);
 $em  = $em->getEntityManager();
@@ -39,8 +39,7 @@ $em  = $em->getEntityManager();
 /*****************/
 
 $app->get('/', function () use($app,$twig){
-	$app->flash('test', 'Test');
-	echo $twig->render('index.php');
+	echo $twig->render('index.php', array('flash' => $_SESSION['slim.flash'] ));
 })->name('home');
 
 

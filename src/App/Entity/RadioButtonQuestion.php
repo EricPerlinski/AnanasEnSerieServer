@@ -112,4 +112,8 @@ class RadioButtonQuestion extends Question
             'item' => json_encode($this->getItem()));
     }
 
+    public function getType(){
+        return "RadioButtonQuestion";
+    }
+
 }

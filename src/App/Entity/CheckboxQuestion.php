@@ -108,4 +108,8 @@ class CheckboxQuestion extends Question
         return array('answer' => json_encode($this->getAnswer()), 
             'item' => json_encode($this->getItem()));
     }
+
+    public function getType(){
+        return "CheckboxQuestion";
+    }
 }

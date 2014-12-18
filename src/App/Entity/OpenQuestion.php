@@ -103,4 +103,8 @@ class OpenQuestion extends Question
     {
         return $this->question;
     }
+
+    public function getType(){
+        return "OpenQuestion";
+    }
 }

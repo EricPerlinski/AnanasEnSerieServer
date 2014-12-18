@@ -4,11 +4,15 @@
 					Flashs par heure <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu" role="menu">
-					<li><a class="m" value="2014-02-19" href="#">2014-02-19</a></li>
-					<li><a class="m" value="2014-02-20" href="#">2014-02-20</a></li>
-					<li><a class="m" value="2014-02-21" href="#">2014-02-21</a></li>
-					<li><a class="m" value="2014-02-22" href="#">2014-02-22</a></li>
-					<li><a class="m" value="2014-02-23" href="#">2014-02-23</a></li>
+					<li><a class="m" value="7" href="#">Il y a 7 jours</a></li>
+					<li><a class="m" value="6" href="#">Il y a 6 jours</a></li>
+					<li><a class="m" value="5" href="#">Il y a 5 jours</a></li>
+					<li><a class="m" value="4" href="#">Il y a 4 jours</a></li>
+					<li><a class="m" value="3" href="#">Il y a 3 jours</a></li>
+					<li><a class="m" value="2" href="#">Il y a 2 jours</a></li>
+					<li><a class="m" value="1" href="#">Il y a 1 jour</a></li>
+					<li><a class="m" value="0" href="#">Aujourd'hui</a></li>
+
 				</ul>
 			</div>
 
@@ -23,15 +27,15 @@
 		//Set up stack method
 		var stack = d3.layout.stack();
 
-		d3.json('/projet11/test/mperday.json' ,function(json){
+		d3.json('{{ getLog }}' ,function(json){
 			dataset = json;
 
 			//Data, stacked
 			stack(dataset);
 
 			var color_hash = {
-				0 : ["Invite","#1f77b4"],
-				1 : ["Accept","#2ca02c"]
+				0 : ["Flashs","#1f77b4"]/*,
+				1 : ["Accept","#2ca02c"]*/
 			};
 
 
@@ -177,18 +181,7 @@
 			.on("click", function() {
 				var date = this.getAttribute("value");
 
-				var str;
-				if(date == "2014-02-19"){
-					str = "/projet11/test/19.json";
-				}else if(date == "2014-02-20"){
-					str = "/projet11/test/20.json";
-				}else if(date == "2014-02-21"){
-					str = "/projet11/test/21.json";
-				}else if(date == "2014-02-22"){
-					str = "/projet11/test/22.json";
-				}else{
-					str = "/projet11/test/23.json";
-				}
+				var str = ("{{ getDailyLog }}" + date);
 
 				d3.json(str,function(json){
 
@@ -283,7 +276,7 @@
 					.text("Hours");
 
 					svg.select(".title")
-					.text("Nombre de flashs par heure le " + date + ".");
+					.text("Nombre de flashs par heure.");
 				});			
 	});
 

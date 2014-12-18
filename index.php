@@ -51,11 +51,10 @@ $app->get('/like/:path', function ($path) use($app,$twig,$em){
 		$app->response->setStatus(200);
 	}else{
 
-		$qr = $em->getRepository("App\Entity\QRCode")->findBy(array('path' => $path));
-		if(count($qr)!=1){
+		$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('path' => $path));
+		if($qr==null){
 			$app->notFound();
 		}
-		$qr = $qr[0];
 		$qr->increment();
 		$cl = new ClickLog();
 		$em->persist($cl);
@@ -78,11 +77,10 @@ $app->get('/like/:path', function ($path) use($app,$twig,$em){
 $app->get('/redirect/:path', function ($path) use($app,$twig,$em){
 
 	$vote = $app->getCookie("$path");
-	$qr = $em->getRepository("App\Entity\QRCode")->findBy(array('path' => $path));
-	if(count($qr)!=1){
+	$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('path' => $path));
+	if($qr==null){
 		$app->notFound();
 	}
-	$qr = $qr[0];
 
 	if(!$vote){
 		$qr->increment();
@@ -110,11 +108,10 @@ $app->get('/yes/:path', function ($path) use($app,$twig,$em){
 		$app->response->setStatus(200);
 	}else{
 
-		$qr = $em->getRepository("App\Entity\QRCode")->findBy(array('path' => $path));
-		if(count($qr)!=1){
+		$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('path' => $path));
+		if($qr==null){
 			$app->notFound();
 		}
-		$qr = $qr[0];
 		$qr->increment();
 		$cl = new ClickLog();
 		$em->persist($cl);
@@ -140,11 +137,10 @@ $app->get('/no/:path', function ($path) use($app,$twig,$em){
 		$app->response->setStatus(200);
 	}else{
 
-		$qr = $em->getRepository("App\Entity\QRCode")->findBy(array('path' => $path));
-		if(count($qr)!=1){
+		$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('path' => $path));
+		if($qr==null){
 			$app->notFound();
 		}
-		$qr = $qr[0];
 		$qr->increment();
 		$qr->incrementNo();
 		$cl = new ClickLog();
@@ -167,11 +163,10 @@ $app->get('/no/:path', function ($path) use($app,$twig,$em){
 
 $app->get('/admin/get/like/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
 
-	$qr = $em->getRepository("App\Entity\QRCode")->findBy(array('pathAdmin' => $pathAdmin));
-	if(count($qr)!=1){
+	$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('pathAdmin' => $pathAdmin));
+	if($qr==null){
 		$app->notFound();
 	}
-	$qr = $qr[0];
 	//RENDER
 	$title = $qr->getTitle();
 	$counter = $qr->getCounter();
@@ -183,11 +178,10 @@ $app->get('/admin/get/like/:pathAdmin', function ($pathAdmin) use($app,$twig,$em
 
 $app->get('/admin/get/redirect/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
 
-	$qr = $em->getRepository("App\Entity\QRCode")->findBy(array('pathAdmin' => $pathAdmin));
-	if(count($qr)!=1){
+	$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('pathAdmin' => $pathAdmin));
+	if($qr==null){
 		$app->notFound();
 	}
-	$qr = $qr[0];
 	//RENDER
 	$title = $qr->getTitle();
 	$counter = $qr->getCounter();
@@ -199,11 +193,10 @@ $app->get('/admin/get/redirect/:pathAdmin', function ($pathAdmin) use($app,$twig
 
 $app->get('/admin/get/yesno/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
 
-	$qr = $em->getRepository("App\Entity\QRCode")->findBy(array('pathAdmin' => $pathAdmin));
-	if(count($qr)!=1){
+	$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('pathAdmin' => $pathAdmin));
+	if($qr==null){
 		$app->notFound();
 	}
-	$qr = $qr[0];
 	//RENDER
 	$title = $qr->getTitle();
 	$counter = $qr->getCounter();
@@ -331,11 +324,10 @@ $app->post('/api/admin/add/yesno', function () use($app,$twig,$em){
 
 $app->get('/api/admin/get/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
 
-	$qr = $em->getRepository("App\Entity\QRCode")->findBy(array('pathAdmin' => $pathAdmin));
-	if(count($qr)!=1){
+	$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('pathAdmin' => $pathAdmin));
+	if($qr==null){
 		$app->notFound();
 	}
-	$qr=$qr[0];
 
 	//JSON Encode
 	$qrJson = json_encode($qr);

@@ -4,6 +4,7 @@
 	{% block head %}
 	<link rel="stylesheet" href="style.css" />
 	<title>{% block title %}{% endblock %}</title>
+	<link rel="icon" href="ananas.ico" />
 	<meta charset="UTF-8">
 	{% endblock %}
 </head>

@@ -232,11 +232,16 @@ $app->get('/admin/get/redirect/:pathAdmin', function ($pathAdmin) use($app,$twig
 	$title = $qr->getTitle();
 	$counter = $qr->getCounter();
 	$url = $qr->getUrl();
+	$getLog = $app->urlFor('getDailyStats', array('pathAdmin' => $pathAdmin));
+	$getDailyLog = $app->urlFor('getHourlyStats', array('pathAdmin' => $pathAdmin));
+	$getDailyLog = substr($getDailyLog, 0, $getDailyLog - 5);
 	echo $twig->render('adminRedirect.php',array(
 		'name'=> $title, 'counter' => $counter, 'url' => $url ,
 		'target' => $app->urlFor('adminRedirectPOST', array('pathAdmin' => $pathAdmin)), 
-		'flash' => isset($_SESSION['slim.flash']) ? $_SESSION['slim.flash'] : null)
-	);	
+		'flash' => isset($_SESSION['slim.flash']) ? $_SESSION['slim.flash'] : null,
+		'getLog' => $getLog,
+		'getDailyLog' => $getDailyLog
+	));
 	$app->response->setStatus(200);
 
 })->name('adminRedirect')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);

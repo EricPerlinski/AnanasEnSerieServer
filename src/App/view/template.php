@@ -3,8 +3,8 @@
 <head>
 	{% block head %}
 	{% block style %}
-		<link rel="stylesheet" href="./asset/css/style.css" />
-		<link rel="stylesheet" href="./vendor/twbs/bootstrap/dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="asset/css/style.css" />
+		<link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="./vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css" />
 	{% endblock %}
 	<title>{% block title %}{% endblock %}</title>

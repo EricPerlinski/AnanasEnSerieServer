@@ -216,7 +216,7 @@ $app->get('/admin/get/like/:pathAdmin', function ($pathAdmin) use($app,$twig,$em
 		'counter' => $counter,
 		'getLog' => $getLog,
 		'getDailyLog' => $getDailyLog
-	));
+		));
 	$app->response->setStatus(200);
 
 })->name('adminLike')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
@@ -241,7 +241,7 @@ $app->get('/admin/get/redirect/:pathAdmin', function ($pathAdmin) use($app,$twig
 		'flash' => isset($_SESSION['slim.flash']) ? $_SESSION['slim.flash'] : null,
 		'getLog' => $getLog,
 		'getDailyLog' => $getDailyLog
-	));
+		));
 	$app->response->setStatus(200);
 
 })->name('adminRedirect')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
@@ -277,7 +277,17 @@ $app->get('/admin/get/yes/:pathAdmin', function ($pathAdmin) use($app,$twig,$em)
 	$title = $qr->getTitle();
 	$counter = $qr->getCounter();
 	$counterNo = $qr->getCounterNo();
-	echo $twig->render('adminYesNo.php',array('name'=> $title, 'counter' => $counter, 'counterNo' => $counterNo ));	
+	$getLog = $app->urlFor('getDailyStats', array('pathAdmin' => $pathAdmin));
+	$getDailyLog = $app->urlFor('getHourlyStats', array('pathAdmin' => $pathAdmin));
+	$getDailyLog = substr($getDailyLog, 0, $getDailyLog - 5);
+	echo $twig->render('adminYesNo.php',array(
+		'name'=> $title,
+		'counter' => $counter,
+		'counterNo' => $counterNo,
+		'getLog' => $getLog,
+		'getDailyLog' => $getDailyLog,
+		'isYesNo' => true
+		));	
 	$app->response->setStatus(200);
 
 })->name('adminYes')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
@@ -497,24 +507,36 @@ $app->get('/api/admin/getdailystats/:pathAdmin', function ($pathAdmin) use($app,
 	}
 
 	$clickLogs = array();
+	$noClickLogs = array();
+
 	$date = new \DateTime();
 	$date = $date->sub(DateInterval::createFromDateString('7 days'));
 	for($i= 0; $i < 7; $i ++){
 		$date = $date->add(DateInterval::createFromDateString('1 days'));
 		$clickLogs[] = array('time' => $date->format('Y-m-d'), 'y' => 0);
+		$noClickLogs[] = array('time' => $date->format('Y-m-d'), 'y' => 0);
 	}
-
 
 	foreach ($qr->getClickLog() as $clickLog) {
 		$clickLogs[7 - 1 - $clickLog->getDate()->diff($date)->days]['y'] ++;
 
 	}
 
-	$clickLogs = json_encode($clickLogs);
+	if($qr instanceof YesNo){
+		foreach ($qr->getClickLogNo() as $clickLog) {
+			$noClickLogs[7 - 1 - $clickLog->getDate()->diff($date)->days]['y'] ++;
+		}
+	}
 
-	//JSON Encode
-	$qrJson = json_encode($qr);
-	echo "[$clickLogs]";
+	$clickLogs = json_encode($clickLogs);
+	$noClickLogs = json_encode($noClickLogs);
+
+	if($qr instanceof YesNo){
+		echo "[$clickLogs,$noClickLogs]";
+	} else{
+		echo "[$clickLogs]";
+	}
+	
 	$app->response->setStatus(200);
 
 })->name('getDailyStats')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
@@ -527,6 +549,7 @@ $app->get('/api/admin/gethourlystats/:pathAdmin/:days', function ($pathAdmin, $d
 	}
 
 	$clickLogs = array();
+	$noClickLogs = array();
 
 	$compareTo = new \DateTime();
 	$compareTo = $compareTo->sub(DateInterval::createFromDateString("$days days"));
@@ -534,23 +557,33 @@ $app->get('/api/admin/gethourlystats/:pathAdmin/:days', function ($pathAdmin, $d
 
 	for($i= 0; $i < 24; $i ++){
 		$clickLogs[] = array('time' => "$i", 'y' => 0);
+		$noClickLogs[] = array('time' => "$i", 'y' => 0);
 	}
 
 
 	foreach ($qr->getClickLog() as $clickLog) {
-
 		if($compareTo == $clickLog->getDate()->format('Y-m-d')){
 			$clickLogs[intval($clickLog->getDate()->format('H'))]['y'] ++;
 		}
-		
+	}
 
+	if($qr instanceof YesNo){
+		foreach ($qr->getClickLogNo() as $clickLog) {
+			if($compareTo == $clickLog->getDate()->format('Y-m-d')){
+				$noClickLogs[intval($clickLog->getDate()->format('H'))]['y'] ++;
+			}
+		}
 	}
 
 	$clickLogs = json_encode($clickLogs);
+	$noClickLogs = json_encode($noClickLogs);
 
-	//JSON Encode
-	$qrJson = json_encode($qr);
-	echo "[$clickLogs]";
+	if($qr instanceof YesNo){
+		echo "[$clickLogs,$noClickLogs]";
+	} else{
+		echo "[$clickLogs]";
+	}	
+
 	$app->response->setStatus(200);
 
 })->name('getHourlyStats')->conditions(['pathAdmin' => '[0-9a-zA-Z]+', 'date' => '[0-9]+']);

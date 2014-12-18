@@ -34,8 +34,12 @@
 			stack(dataset);
 
 			var color_hash = {
-				0 : ["Flashs","#1f77b4"]/*,
-				1 : ["Accept","#2ca02c"]*/
+				{% if isYesNo %}
+					0 : ["Oui","#2ca02c"],
+					1 : ["Non","#ff1111"]
+				{% else %}
+					0 : ["Flashs","#1f77b4"]
+				{% endif %}
 			};
 
 

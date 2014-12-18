@@ -21,6 +21,11 @@ class RadioButtonAnswer
      */
     private $id;
 
+    /**
+     * @OneToOne(targetEntity="Item")
+     * @JoinColumn(name="answer_id", referencedColumnName="id")
+     **/
+    private $answer;
 
     /**
      * Get id
@@ -30,5 +35,28 @@ class RadioButtonAnswer
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set answer
+     *
+     * @param \App\Entity\Item $answer
+     * @return RadioButtonAnswer
+     */
+    public function setAnswer(\App\Entity\Item $answer = null)
+    {
+        $this->answer = $answer;
+
+        return $this;
+    }
+
+    /**
+     * Get answer
+     *
+     * @return \App\Entity\Item 
+     */
+    public function getAnswer()
+    {
+        return $this->answer;
     }
 }

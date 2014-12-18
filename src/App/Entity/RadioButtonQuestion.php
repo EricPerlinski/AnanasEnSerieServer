@@ -13,9 +13,9 @@ class RadioButtonQuestion extends Question
 {
 
 	/**
-     * @ManyToMany(targetEntity="Item")
-     * @JoinTable(name="radiobutton_answers",
-     *      joinColumns={@JoinColumn(name="radiobutton_id", referencedColumnName="id")},
+     * @ManyToMany(targetEntity="RadioButtonAnswer")
+     * @JoinTable(name="radiobuttonquestion_answers",
+     *      joinColumns={@JoinColumn(name="question_id", referencedColumnName="id", onDelete="CASCADE"  )},
      *      inverseJoinColumns={@JoinColumn(name="answer_id", referencedColumnName="id", unique=true)}
      *      )
      **/
@@ -37,39 +37,6 @@ class RadioButtonQuestion extends Question
     {
         $this->answer = new \Doctrine\Common\Collections\ArrayCollection();
         $this->item = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add answer
-     *
-     * @param \App\Entity\Item $answer
-     * @return RadioButtonQuestion
-     */
-    public function addAnswer(\App\Entity\Item $answer)
-    {
-        $this->answer[] = $answer;
-
-        return $this;
-    }
-
-    /**
-     * Remove answer
-     *
-     * @param \App\Entity\Item $answer
-     */
-    public function removeAnswer(\App\Entity\Item $answer)
-    {
-        $this->answer->removeElement($answer);
-    }
-
-    /**
-     * Get answer
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getAnswer()
-    {
-        return $this->answer;
     }
 
     /**
@@ -103,5 +70,38 @@ class RadioButtonQuestion extends Question
     public function getItem()
     {
         return $this->item;
+    }
+
+    /**
+     * Add answer
+     *
+     * @param \App\Entity\RadioButtonAnswer $answer
+     * @return RadioButtonQuestion
+     */
+    public function addAnswer(\App\Entity\RadioButtonAnswer $answer)
+    {
+        $this->answer[] = $answer;
+
+        return $this;
+    }
+
+    /**
+     * Remove answer
+     *
+     * @param \App\Entity\RadioButtonAnswer $answer
+     */
+    public function removeAnswer(\App\Entity\RadioButtonAnswer $answer)
+    {
+        $this->answer->removeElement($answer);
+    }
+
+    /**
+     * Get answer
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAnswer()
+    {
+        return $this->answer;
     }
 }

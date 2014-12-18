@@ -39,6 +39,7 @@ $em  = $em->getEntityManager();
 /*****************/
 
 $app->get('/', function () use($app,$twig){
+	$app->flash('test', 'Test');
 	echo $twig->render('index.php');
 })->name('home');
 

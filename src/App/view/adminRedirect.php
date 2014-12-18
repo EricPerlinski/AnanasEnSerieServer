@@ -3,7 +3,10 @@
 {% block title %}Redirection pour {{ nom }} {% endblock %}
 
 {% block content %}
-Il y a {{counter}} redirections pour {{name}}
+<div class="row">
+Il y a {{counter}} redirections pour {{name}}.
+</div>
+<div class="row">
 <form role="form">
   <div class="form-group">
     <label for="link">Lien</label>
@@ -11,4 +14,5 @@ Il y a {{counter}} redirections pour {{name}}
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>
 {% endblock %}

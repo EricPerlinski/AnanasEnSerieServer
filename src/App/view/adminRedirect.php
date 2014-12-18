@@ -7,12 +7,12 @@
 Il y a {{counter}} redirections pour {{name}}.
 </div>
 <div class="row">
-<form role="form">
+<form role="form" method="POST" action="c26c676a14">
   <div class="form-group">
-    <label for="link">Lien</label>
-    <input type="url" class="form-control" id="link" placeholder="Lien">
+    <label for="url">Destination</label>
+    <input type="url" class="form-control" id="url" name='url' placeholder="{{ url }}"/>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Valider</button>
 </form>
 </div>
 {% endblock %}

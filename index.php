@@ -223,10 +223,31 @@ $app->get('/admin/get/redirect/:pathAdmin', function ($pathAdmin) use($app,$twig
 	//RENDER
 	$title = $qr->getTitle();
 	$counter = $qr->getCounter();
-	echo $twig->render('adminRedirect.php',array('name'=> $title, 'counter' => $counter ));	
+	$url = $qr->getUrl();
+	echo $twig->render('adminRedirect.php',array('name'=> $title, 'counter' => $counter, 'url' => $url ));	
 	$app->response->setStatus(200);
 
 })->name('adminRedirect')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
+
+$app->post('/admin/get/redirect/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
+
+	$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('pathAdmin' => $pathAdmin));
+	if($qr==null){
+		$app->notFound();
+	}
+
+	if($app->request->post('url')){
+		$qr->setUrl($app->request->post('url'));
+		$em->persist($qr);
+		$em->flush();
+		$app->flash('success', "Url redirigée avec succès.");
+		$app->redirect($app->urlFor('adminRedirect', array('pathAdmin' => $pathAdmin)));
+	} else {
+		$app->flash('danger', "Le formulaire n'est pas correct.");
+		$app->redirect($app->urlFor('adminRedirect', array('pathAdmin' => $pathAdmin)));
+	}
+
+})->name('adminRedirectPOST')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
 
 
 $app->get('/admin/get/yes/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
@@ -242,14 +263,14 @@ $app->get('/admin/get/yes/:pathAdmin', function ($pathAdmin) use($app,$twig,$em)
 	echo $twig->render('adminYesNo.php',array('name'=> $title, 'counter' => $counter, 'counterNo' => $counterNo ));	
 	$app->response->setStatus(200);
 
-})->name('adminLike')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
+})->name('adminYes')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
 
 $app->get('/admin/get/survey/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
 
 	echo "TODO";
 	$app->response->setStatus(200);
 
-})->name('adminLike')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
+})->name('adminSurvey')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
 
 
 /*****************/
@@ -327,7 +348,7 @@ $app->post('/api/admin/add/redirect', function () use($app,$twig,$em){
 	echo "[{\"path\":\"$path\",\"pathAdmin\":\"$pathAdmin\"}]";
 	$app->response->setStatus(200);
 
-})->name('addLike');
+})->name('addRedirect');
 
 $app->post('/api/admin/add/yesno', function () use($app,$twig,$em){
     //traitement des params POST

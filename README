@@ -5,10 +5,6 @@ https://bitbucket.org/telecomnancy/codingweek_prj11-client
 Url disponnibles RELEASE_DAY_2 :
 
 
-
-
-
-
 ** WEB
 
 - / : qui affiche la page d'accueil et permet de télecharger le client java (pas complète pour le moment).
@@ -47,6 +43,7 @@ Url disponnibles RELEASE_DAY_4 :
 ** WEB
 
 - /yes/:path : permet de voter oui pour un QRCode de type Oui/Non
+
 - /no/:path : permet de voter non pour un QRCode de type Oui/Non
 
 - /admin/get/yesno/:pathAdmin : permet de voir les resultats pour un QRCode de type Oui/Non
@@ -56,9 +53,9 @@ Url disponnibles RELEASE_DAY_4 :
 
 - /api/admin/add/yesno : permet de creer un QRCode de type Oui/Non
 
-- /api/admin/gethourlystats/:pathAdmin/:date : permet d'avoir les flash pour un jour donné
+- /api/admin/gethourlystats/:pathAdmin/:days : permet de récupérer le nombre de flashs par heure days jours plus tôt
 
-- /api/admin/getdailystats/:pathAdmin : permet d avoir les flashs des 7 derniers jours
+- /api/admin/getdailystats/:pathAdmin : permet de récupérer le nombre de flashs des 7 derniers jours
 
 
 Fichiers liés :

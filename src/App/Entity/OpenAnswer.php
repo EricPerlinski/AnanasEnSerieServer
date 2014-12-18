@@ -21,6 +21,12 @@ class OpenAnswer
      */
     private $id;
 
+    /**
+     * @var string
+     *
+     * @Column(name="answer", type="text")
+     */
+    private $answer;
 
     /**
      * Get id
@@ -30,5 +36,28 @@ class OpenAnswer
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set answer
+     *
+     * @param string $answer
+     * @return OpenAnswer
+     */
+    public function setAnswer($answer)
+    {
+        $this->answer = $answer;
+
+        return $this;
+    }
+
+    /**
+     * Get answer
+     *
+     * @return string 
+     */
+    public function getAnswer()
+    {
+        return $this->answer;
     }
 }

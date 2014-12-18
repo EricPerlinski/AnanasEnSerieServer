@@ -1,7 +1,7 @@
 		<div>
 			<div class="btn-group pull-right">
 				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-					Messages per hour <span class="caret"></span>
+					Flashs par heure <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu" role="menu">
 					<li><a class="m" value="2014-02-19" href="#">2014-02-19</a></li>
@@ -31,9 +31,7 @@
 
 			var color_hash = {
 				0 : ["Invite","#1f77b4"],
-				1 : ["Accept","#2ca02c"],
-				2 : ["Decline","#ff7f0e"]
-
+				1 : ["Accept","#2ca02c"]
 			};
 
 
@@ -156,14 +154,14 @@
 				.attr("y", 0 - 5)
 				.attr("x", 0-(h/2))
 				.attr("dy","1em")
-				.text("Number of Messages");
+				.text("Nombre d'accès au QRCode");
 
 				svg.append("text")
 				.attr("class","xtext")
 				.attr("x",w/2 - padding.left)
 				.attr("y",h - 5)
 				.attr("text-anchor","middle")
-				.text("Days");
+				.text("Jours");
 
 				svg.append("text")
 				.attr("class","title")
@@ -172,7 +170,7 @@
 				.attr("text-anchor", "middle")  
 				.style("font-size", "16px") 
 				.style("text-decoration", "underline")  
-				.text("Number of messages per day.");
+				.text("Nombre de flashs par jour.");
 
 			//On click, update with new data			
 			d3.selectAll(".m")
@@ -285,7 +283,7 @@
 					.text("Hours");
 
 					svg.select(".title")
-					.text("Number of messages per hour on " + date + ".");
+					.text("Nombre de flashs par heure le " + date + ".");
 				});			
 	});
 

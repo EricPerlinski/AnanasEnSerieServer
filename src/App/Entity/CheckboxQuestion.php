@@ -103,4 +103,9 @@ class CheckboxQuestion extends Question
     {
         return $this->answer;
     }
+
+    public function jsonSerialize() {
+        return array('answer' => json_encode($this->getAnswer()), 
+            'item' => json_encode($this->getItem()));
+    }
 }

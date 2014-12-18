@@ -22,6 +22,20 @@ class OpenQuestion extends Question
     private $answer;
 
     /**
+     * @var string
+     *
+     * @Column(name="question", type="text")
+     */
+    private $question;
+
+    /**
+     * @var string
+     *
+     * @Column(name="answer", type="text")
+     */
+    
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -60,5 +74,33 @@ class OpenQuestion extends Question
     public function getAnswer()
     {
         return $this->answer;
+    }
+
+    public function jsonSerialize() {
+        return array('question' => json_encode($this->getQuestion()), 
+            'answer' => json_encode($this->getAnswer()));
+    }
+
+    /**
+     * Set question
+     *
+     * @param string $question
+     * @return OpenQuestion
+     */
+    public function setQuestion($question)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return string 
+     */
+    public function getQuestion()
+    {
+        return $this->question;
     }
 }

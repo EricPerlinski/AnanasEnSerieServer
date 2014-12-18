@@ -28,6 +28,10 @@ class Item implements \JsonSerializable
      */
     private $text;
 
+    public function jsonSerialize() {
+        return array('text' => json_encode($this->getText()));
+    }
+
     /**
      * Get id
      *
@@ -38,9 +42,6 @@ class Item implements \JsonSerializable
         return $this->id;
     }
 
-    public function jsonSerialize() {
-        return array();
-    }
 
     /**
      * Set text

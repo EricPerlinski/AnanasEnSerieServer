@@ -6,6 +6,14 @@ use App\Entity\QRCode as QRCode;
 use App\Entity\Like as Like;
 use App\Entity\Redirect as Redirect;
 use App\Entity\YesNo as YesNo;
+use App\Entity\Survey as Survey;
+
+use App\Entity\Item as Item;
+
+use App\Entity\CheckboxQuestion as CheckboxQuestion;
+use App\Entity\OpenQuestion as OpenQuestion;
+use App\Entity\RadioButtonQuestion as RadioButtonQuestion;
+
 use App\Entity\ClickLog as ClickLog;
 
 require 'vendor/autoload.php';
@@ -161,6 +169,35 @@ $app->get('/no/:path', function ($path) use($app,$twig,$em){
 	}
 })->name('no')->conditions(['path' => '[0-9a-zA-Z]+']);
 
+$app->get('/survey/:path', function ($path) use($app,$twig,$em){
+	$vote = $app->getCookie("$path");
+	$vote=false;
+	if($vote){
+		echo "Vous avez déjà voté";
+		$app->response->setStatus(200);
+	}else{
+
+		$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('path' => $path));
+		if($qr==null){
+			$app->notFound();
+		}
+		$qr->increment();
+		$cl = new ClickLog();
+		$em->persist($cl);
+		$em->persist($qr);
+		$em->flush();
+
+		$app->setCookie("$path",true);
+
+		//Render
+		$title = $qr->getTitle();
+		$counter = $qr->getCounter();
+
+
+		echo $twig->render('survey.php',array('name' => $title , 'survey' => $qr));
+		$app->response->setStatus(200);
+	}
+})->name('survey')->conditions(['path' => '[0-9a-zA-Z]+']);
 
 $app->get('/admin/get/like/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
 
@@ -192,7 +229,7 @@ $app->get('/admin/get/redirect/:pathAdmin', function ($pathAdmin) use($app,$twig
 })->name('adminRedirect')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
 
 
-$app->get('/admin/get/yesno/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
+$app->get('/admin/get/yes/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
 
 	$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('pathAdmin' => $pathAdmin));
 	if($qr==null){
@@ -206,6 +243,14 @@ $app->get('/admin/get/yesno/:pathAdmin', function ($pathAdmin) use($app,$twig,$e
 	$app->response->setStatus(200);
 
 })->name('adminLike')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
+
+$app->get('/admin/get/survey/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
+
+	echo "TODO";
+	$app->response->setStatus(200);
+
+})->name('adminLike')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
+
 
 /*****************/
 /****** API ******/
@@ -321,6 +366,75 @@ $app->post('/api/admin/add/yesno', function () use($app,$twig,$em){
 
 })->name('addYesno');
 
+
+$app->post('/api/admin/add/survey', function () use($app,$twig,$em){
+    //traitement des params POST
+
+	$json;
+	if(isset($_POST['objet'])){
+		$json = $_POST['objet'];
+	}else{ 
+		$app->notFound();
+	}
+
+	$obj = json_decode($json,true);
+	$qr = new Survey();
+	
+	$qr->setTitle($obj['title']);
+
+	$questions = $obj['questions'];
+	foreach ($questions as $key => $question) {
+		$type = $question['type'];
+		$q=null;
+		if($type=="OpenQuestion"){
+			$q = new OpenQuestion();
+			$q->setQuestion($question['object']['question']);
+			
+		}else if($type=="RadioButtonQuestion"){
+			$q = new RadioButtonQuestion();
+			foreach ($question['object']['items'] as $key => $item) {
+				$i = new Item();
+				$i->setText($item);
+				$q->addItem($i);
+				$em->persist($i);
+			}
+		}else if($type=="CheckBoxQuestion"){
+			$q = new CheckboxQuestion();
+			foreach ($question['object']['items'] as $key => $item) {
+				$i = new Item();
+				$i->setText($item);
+				$q->addItem($i);
+				$em->persist($i);
+			}
+		}
+		$text = $question['object']['name'];
+		$q->setText($text);
+		$em->persist($q);
+
+		$qr->addQuestion($q);
+	}
+
+
+
+	$qr->setPath(rand(1,1000));
+	$qr->setPathAdmin(rand(1,1000));
+	$em->persist($qr);
+
+	$em->flush();
+	$qr->setPath(hash('crc32b', $qr->getCreationDate()->format('Y-m-d H:i:s') . $qr->getId()) . $qr->getId());
+	$qr->setPathAdmin(hash('crc32b', $qr->getCreationDate()->format('Y-m-d H:i:s') . 'admin' . $qr->getId()) . $qr->getId());
+	$em->persist($qr);
+	$em->flush();
+
+	
+	//RENDER
+	$id=$qr->getId();
+	$path=$qr->getPath();
+	$pathAdmin=$qr->getPathAdmin();
+	echo "[{\"path\":\"$path\",\"pathAdmin\":\"$pathAdmin\"}]";
+	$app->response->setStatus(200);
+
+})->name('addSurvey');
 
 
 $app->get('/api/admin/get/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){

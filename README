@@ -36,15 +36,29 @@ Url disponnibles RELEASE_DAY_3 :
 
 ** API
 
-- /api/admin/add/like : qui prend en paramètres POST un "object", qui sera un objet "Like". Retourne le path et pathAdmin du sondage.
-/api/admin/get/pathAdmin
-
-#### NEW ####
 - /api/admin/add/redirect : qui prend en paramètres POST un "object", qui sera un objet "Redirect". Retourne le path et pathAdmin du sondage.
 
 - /api/test : retourne le texte "ananas" afin de tester dans le client si l'url du serveur est correct.
 
 
+
+Url disponnibles RELEASE_DAY_4 :
+
+** WEB
+
+- /yes/:path : permet de voter oui pour un QRCode de type Oui/Non
+- /no/:path : permet de voter non pour un QRCode de type Oui/Non
+
+- /admin/get/yesno/:pathAdmin : permet de voir les resultats pour un QRCode de type Oui/Non
+
+
+** API
+
+- /api/admin/add/yesno : permet de creer un QRCode de type Oui/Non
+
+- /api/admin/gethourlystats/:pathAdmin/:date : permet d'avoir les flash pour un jour donné
+
+- /api/admin/getdailystats/:pathAdmin : permet d avoir les flashs des 7 derniers jours
 
 
 Fichiers liés :

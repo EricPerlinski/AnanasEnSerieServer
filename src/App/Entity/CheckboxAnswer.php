@@ -22,10 +22,14 @@ class CheckboxAnswer
     private $id;
 
     /**
-     * @OneToOne(targetEntity="Item")
-     * @JoinColumn(name="answer_id", referencedColumnName="id")
+     * @ManyToMany(targetEntity="Item")
+     * @JoinTable(name="checkboxanswer_answers",
+     *      joinColumns={@JoinColumn(name="checkboxanswer_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="answer_id", referencedColumnName="id", unique=true)}
+     *      )
      **/
     private $answer;
+
 
     /**
      * Get id
@@ -36,24 +40,41 @@ class CheckboxAnswer
     {
         return $this->id;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->answer = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
-     * Set answer
+     * Add answer
      *
      * @param \App\Entity\Item $answer
      * @return CheckboxAnswer
      */
-    public function setAnswer(\App\Entity\Item $answer = null)
+    public function addAnswer(\App\Entity\Item $answer)
     {
-        $this->answer = $answer;
+        $this->answer[] = $answer;
 
         return $this;
     }
 
     /**
+     * Remove answer
+     *
+     * @param \App\Entity\Item $answer
+     */
+    public function removeAnswer(\App\Entity\Item $answer)
+    {
+        $this->answer->removeElement($answer);
+    }
+
+    /**
      * Get answer
      *
-     * @return \App\Entity\Item 
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getAnswer()
     {

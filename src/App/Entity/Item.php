@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping;
  * @Entity
  * @Table(name="item")
  */
-abstract class Item implements \JsonSerializable
+class Item implements \JsonSerializable
 {
 
     /**

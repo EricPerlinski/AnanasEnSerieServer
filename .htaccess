@@ -15,7 +15,7 @@ RewriteCond $1 ^(conception|src|config)
 RewriteRule ^(.*)$ index.php/access_denied/$1 [PT,L]
 
 # Allow these directories and files to be displayed directly:
-RewriteCond $1 ^(index\.php|robots\.txt|ananas\.ico|vendor|asset|test)
+RewriteCond $1 ^(index\.php|robots\.txt|ananas\.ico|vendor|asset)
 
 # No rewriting
 RewriteRule ^(.*)$ - [PT,L]

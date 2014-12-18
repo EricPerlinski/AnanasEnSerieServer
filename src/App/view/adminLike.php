@@ -4,4 +4,5 @@
 
 {% block content %}
 	IL y a {{counter}} votes pour {{name}}
+	{% include 'frequency.php' %}
 {% endblock %}

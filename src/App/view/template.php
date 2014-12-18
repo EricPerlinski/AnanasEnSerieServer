@@ -17,6 +17,7 @@
 	{% block javascript %}
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/projet11/vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
 	{% endblock %}
 	<div class="container-fluid">
 		<div id="header">{% include 'header.php' %}</div>	

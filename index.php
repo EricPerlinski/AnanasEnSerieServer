@@ -26,6 +26,7 @@ $app = new \Slim\Slim(array(
 	));
 $app->config = require(__DIR__ . '/app/config/config.php');
 
+$app->add(new \Slim\Middleware\SessionCookie());
 
 $em = new EM($app);
 $em  = $em->getEntityManager();

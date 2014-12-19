@@ -67,9 +67,9 @@
 * <2014-12-18 jeu.>
 ** Ce qui doit etre fait
 *** DONE faire des stats avancés (par rapport aux heure, ...)
-*** TODO faire les sondages evolués
+*** DONE faire les sondages evolués
 **** DONE oui/non
-**** TODO sondage
+**** DONE sondage
 *** DONE securiser avec des .htacces, ...
 ** Problèmes
 ** Ce qu'il reste a faire

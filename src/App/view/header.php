@@ -1,1 +1,1 @@
-<h1>Ananas en Série</h1>
+<h1 style="font-family:customfont;">ANANAS EN SERIE</h1>

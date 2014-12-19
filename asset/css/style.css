@@ -39,3 +39,9 @@ div.foot , div.push {
     width: 100%;
     color:#666666;
 }
+
+@font-face{
+    font-family: "customfont";
+    src: url('/projet11/asset/css/customfont.ttf'),
+    url('/projet11/asset/css/customfont.ttf'); /* IE */
+}

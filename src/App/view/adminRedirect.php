@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="row">
-	Il y a {{counter}} redirections pour {{name}}.
+	Il y a {{counter}} redirections pour {{nom}}.
 </div>
 <div class="row">
 	{% include 'frequency.php' %}

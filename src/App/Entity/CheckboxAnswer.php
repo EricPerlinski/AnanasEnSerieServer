@@ -25,7 +25,7 @@ class CheckboxAnswer
      * @ManyToMany(targetEntity="Item")
      * @JoinTable(name="checkboxanswer_answers",
      *      joinColumns={@JoinColumn(name="checkboxanswer_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="answer_id", referencedColumnName="id", unique=true)}
+     *      inverseJoinColumns={@JoinColumn(name="answer_id", referencedColumnName="id")}
      *      )
      **/
     private $answer;

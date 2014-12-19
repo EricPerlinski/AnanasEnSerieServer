@@ -22,7 +22,7 @@ class RadioButtonAnswer
     private $id;
 
     /**
-     * @OneToOne(targetEntity="Item")
+     * @ManyToOne(targetEntity="Item")
      * @JoinColumn(name="answer_id", referencedColumnName="id")
      **/
     private $answer;

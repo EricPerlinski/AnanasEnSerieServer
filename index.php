@@ -14,6 +14,10 @@ use App\Entity\CheckboxQuestion as CheckboxQuestion;
 use App\Entity\OpenQuestion as OpenQuestion;
 use App\Entity\RadioButtonQuestion as RadioButtonQuestion;
 
+use App\Entity\CheckboxAnswer as CheckboxAnswer;
+use App\Entity\OpenAnswer as OpenAnswer;
+use App\Entity\RadioButtonAnswer as RadioButtonAnswer;
+
 use App\Entity\ClickLog as ClickLog;
 
 require 'vendor/autoload.php';
@@ -171,7 +175,6 @@ $app->get('/no/:path', function ($path) use($app,$twig,$em){
 
 $app->get('/survey/:path', function ($path) use($app,$twig,$em){
 	$vote = $app->getCookie("$path");
-	$vote=false;
 	if($vote){
 		echo "Vous avez déjà voté";
 		$app->response->setStatus(200);
@@ -181,23 +184,89 @@ $app->get('/survey/:path', function ($path) use($app,$twig,$em){
 		if($qr==null){
 			$app->notFound();
 		}
-		$qr->increment();
-		$cl = new ClickLog();
-		$em->persist($cl);
-		$em->persist($qr);
-		$em->flush();
-
-		$app->setCookie("$path",true);
-
+		
 		//Render
 		$title = $qr->getTitle();
 		$counter = $qr->getCounter();
-
-
-		echo $twig->render('survey.php',array('name' => $title , 'survey' => $qr));
+		$cible=$app->urlFor("surveyPOST",array('path' => $path));
+		echo $twig->render('survey.php',array('name' => $title , 'survey' => $qr , 'cible' => $cible));
 		$app->response->setStatus(200);
 	}
 })->name('survey')->conditions(['path' => '[0-9a-zA-Z]+']);
+
+
+$app->post('/survey/:path', function ($path) use($app,$twig,$em){
+	$vote = $app->getCookie("$path");
+	if($vote){
+		echo "Vous avez déjà voté";
+		$app->response->setStatus(200);
+	}else{
+		$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('path' => $path));
+		if($qr==null){
+			$app->notFound();
+		}	
+		$ok=true;
+		foreach ($_POST as $key => $value) {
+			$q = $em->getRepository("App\Entity\Question")->findOneBy(array('id' => $key));
+			if($q==null){
+				$app->notFound();
+			}else{
+				$rep=null;
+				if($q->getType() == "OpenQuestion"){
+					$str = trim($value);
+					if(strlen($str)>0){
+						$rep = new OpenAnswer();
+						$rep->setAnswer($str);
+						$em->persist($rep);
+						$q->addAnswer($rep);
+					}
+				}else if($q->getType() == "RadioButtonQuestion"){
+					$rep = new RadioButtonAnswer();
+					$i = $em->getRepository("App\Entity\Item")->findOneBy(array('id' => $value));
+					$rep->setAnswer($i);
+					$em->persist($rep);
+					$q->addAnswer($rep);
+				}else if($q->getType() == "CheckboxQuestion"){
+					foreach($value as $v){
+						$rep = new CheckboxAnswer();
+						$i = $em->getRepository("App\Entity\Item")->findOneBy(array('id' => $v));
+						$rep->addAnswer($i);
+						$em->persist($rep);
+						$q->addAnswer($rep);
+					}
+				}
+			}
+			
+		}
+	
+		$em->persist($q);
+		
+		if($ok){
+			$app->setCookie("$path",true);
+			$qr->increment();
+			$cl = new ClickLog();
+			$qr->addClickLog($cl);
+			$em->persist($cl);
+			$em->persist($qr);
+			$em->flush();
+			$title = $qr->getTitle();
+			$counter = $qr->getCounter();
+
+			echo $twig->render('surveyOk.php',array('name'=> $title, 'counter' => $counter ));	
+			$app->response->setStatus(200);
+		}else{
+			$app->setCookie("$path",false);
+			echo "Erreur sondage";
+			$app->response->setStatus(200);
+		}
+	}
+
+	
+
+
+})->name("surveyPOST");
+
+
 
 $app->get('/admin/get/like/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
 
@@ -294,10 +363,72 @@ $app->get('/admin/get/yes/:pathAdmin', function ($pathAdmin) use($app,$twig,$em)
 
 $app->get('/admin/get/survey/:pathAdmin', function ($pathAdmin) use($app,$twig,$em){
 
-	echo "TODO";
+	$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('pathAdmin' => $pathAdmin));
+	if($qr==null){
+		$app->notFound();
+	}
+	//RENDER
+	$title = $qr->getTitle();
+	$counter = $qr->getCounter();
+
+	$reponse=array();
+
+	$reponse['open']=array();
+	$reponse['check']=array();
+	$reponse['radio']=array();
+	foreach ($qr->getQuestion() as $key => $question) {
+		if($question->getType()=="OpenQuestion"){
+			$a=array();
+			foreach ($question->getAnswer() as $k => $answer) {
+				$a[]=$answer->getAnswer();	
+			}
+			$reponse['open'][] = array($question->getQuestion() => $a);
+		}else if($question->getType()=="RadioButtonQuestion"){
+			$a=array();
+			foreach ($question->getItem() as $item) {
+				$count=0;
+				foreach ($question->getAnswer() as $answer) {
+					if($answer->getAnswer()->getId() == $item->getId()){
+						$count++;
+					}
+				}
+				$a[] = array($item->getText() => $count);
+			}
+			$reponse['radio'][] = array($question->getText() => $a);
+		}else if($question->getType()=="CheckboxQuestion"){
+			$a=array();
+			foreach ($question->getItem() as $item) {
+				$count=0;
+				foreach ($question->getAnswer() as $answers) {
+					foreach ($answers->getAnswer() as $answer) {
+						if($answer->getId() == $item->getId()){
+							$count++;
+						}
+					}
+				}
+				$a[] = array($item->getText() => $count);
+			}
+			$reponse['check'][] = array($question->getText() => $a);
+		}
+	}
+
+	$getLog = $app->urlFor('getDailyStats', array('pathAdmin' => $pathAdmin));
+	$getDailyLog = $app->urlFor('getHourlyStats', array('pathAdmin' => $pathAdmin));
+	$getDailyLog = substr($getDailyLog, 0, $getDailyLog - 5);
+
+	echo $twig->render('adminSurvey.php',array(
+		'name'=> $title, 
+		'counter' => $counter, 
+		'survey' => $reponse,
+		'flash' => isset($_SESSION['slim.flash']) ? $_SESSION['slim.flash'] : null,
+		'getLog' => $getLog,
+		'getDailyLog' => $getDailyLog ));	
 	$app->response->setStatus(200);
 
 })->name('adminSurvey')->conditions(['pathAdmin' => '[0-9a-zA-Z]+']);
+
+
+
 
 
 /*****************/

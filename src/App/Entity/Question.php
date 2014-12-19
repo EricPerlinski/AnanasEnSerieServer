@@ -64,4 +64,6 @@ abstract class Question implements \JsonSerializable
     {
         return $this->text;
     }
+
+    abstract function getType();
 }

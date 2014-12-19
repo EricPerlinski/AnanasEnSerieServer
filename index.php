@@ -60,8 +60,8 @@ $app->get('/like/:path', function ($path) use($app,$twig,$em){
 
 	$vote = $app->getCookie("$path");
 	if($vote){
-		echo "Vous avez déjà voté";
-		$app->response->setStatus(200);
+		$app->flash('danger', "Vous avez déjà liké.");
+		$app->redirect($app->urlFor('home', array()));
 	}else{
 
 		$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('path' => $path));
@@ -117,8 +117,8 @@ $app->get('/redirect/:path', function ($path) use($app,$twig,$em){
 $app->get('/yes/:path', function ($path) use($app,$twig,$em){
 	$vote = $app->getCookie("$path");
 	if($vote){
-		echo "Vous avez déjà voté";
-		$app->response->setStatus(200);
+		$app->flash('danger', "Vous avez déjà répondu.");
+		$app->redirect($app->urlFor('home', array()));
 	}else{
 
 		$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('path' => $path));
@@ -146,8 +146,8 @@ $app->get('/yes/:path', function ($path) use($app,$twig,$em){
 $app->get('/no/:path', function ($path) use($app,$twig,$em){
 	$vote = $app->getCookie("$path");
 	if($vote){
-		echo "Vous avez déjà voté";
-		$app->response->setStatus(200);
+		$app->flash('danger', "Vous avez déjà répondu.");
+		$app->redirect($app->urlFor('home', array()));
 	}else{
 
 		$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('path' => $path));
@@ -176,8 +176,8 @@ $app->get('/no/:path', function ($path) use($app,$twig,$em){
 $app->get('/survey/:path', function ($path) use($app,$twig,$em){
 	$vote = $app->getCookie("$path");
 	if($vote){
-		echo "Vous avez déjà voté";
-		$app->response->setStatus(200);
+		$app->flash('danger', "Vous avez déjà répondu au sondage.");
+		$app->redirect($app->urlFor('home', array()));
 	}else{
 
 		$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('path' => $path));
@@ -198,8 +198,8 @@ $app->get('/survey/:path', function ($path) use($app,$twig,$em){
 $app->post('/survey/:path', function ($path) use($app,$twig,$em){
 	$vote = $app->getCookie("$path");
 	if($vote){
-		echo "Vous avez déjà voté";
-		$app->response->setStatus(200);
+		$app->flash('danger', "Vous avez déjà répondu au sondage.");
+		$app->redirect($app->urlFor('home', array()));
 	}else{
 		$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('path' => $path));
 		if($qr==null){

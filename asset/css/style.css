@@ -1,3 +1,7 @@
+html, body {
+    height: 100%;
+}
+
 .row{
 	padding-right: 15px;
 	padding-left: 15px;
@@ -18,10 +22,20 @@
 	stroke: #000;
 }
 
-
 .legend {
 	padding: 5px;
 	font: 10px sans-serif;
 	background: yellow;
 	box-shadow: 2px 2px 1px #888;
+}
+div.wrapper {
+    min-height: 80%;
+    margin: 0 auto 50px; /* the bottom margin is the negative value of the footer's height */
+}
+div.foot , div.push {
+	
+	text-align: center;
+    height: 50px;
+    width: 100%;
+    color:#666666;
 }

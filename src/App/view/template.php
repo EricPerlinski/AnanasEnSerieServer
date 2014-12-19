@@ -25,7 +25,7 @@
 	<div class="container-fluid">
 		<div id="flash">{% include 'flash.php' %}</div>
 	</div>	
-	<div class="container-fluid">
+	<div class="container-fluid jumbotron well">
 		<div id="content">{% block content %}{% endblock %}</div>
 	</div>	
 	<div class="container-fluid">

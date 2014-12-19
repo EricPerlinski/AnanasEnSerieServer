@@ -85,7 +85,10 @@
 ** Problèmes
 ** Ce qu'il reste a faire
 ** Indicateurs projet
-
+*** nombre de taches effectuees 35
+*** nombre de post-it utilises 55
+*** nombre de commits 400
+*** nombre d'ananas consommes 4
 
 
 

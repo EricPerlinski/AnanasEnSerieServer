@@ -650,17 +650,17 @@ $app->get('/api/admin/getdailystats/:pathAdmin', function ($pathAdmin) use($app,
 
 	foreach ($qr->getClickLog() as $clickLog) {
 		$index = 7 - 1 - $clickLog->getDate()->diff($date)->days;
-		if($days >= 0){
-			$clickLogs[7 - 1 - $clickLog->getDate()->diff($date)->days]['y'] ++;
+		if($index >= 0){
+			$clickLogs[$index]['y'] ++;
 		}
 	}
 
 	if($qr instanceof YesNo){
 		foreach ($qr->getClickLogNo() as $clickLog) {
 			$index = 7 - 1 - $clickLog->getDate()->diff($date)->days;
-			if($days >= 0){
-				$noClickLogs[7 - 1 - $clickLog->getDate()->diff($date)->days]['y'] ++;
-			}
+		if($index >= 0){
+			$noClickLogs[$index]['y'] ++;
+		}
 		}
 	}
 

@@ -5,7 +5,6 @@ https://bitbucket.org/telecomnancy/codingweek_prj11-client
 Url disponnibles RELEASE_DAY_2 :
 
 
-
 ** WEB
 
 - / : qui affiche la page d'accueil et permet de télecharger le client java (pas complète pour le moment).
@@ -28,6 +27,9 @@ Url disponnibles RELEASE_DAY_3 :
 
 - /admin/get/redirect/pathAdmin : permet de voir le nombre de votes d'un QRCode de type "redirect".
 
+
+
+
 ** API
 
 - /api/admin/add/redirect : qui prend en paramètres POST un "object", qui sera un objet "Redirect". Retourne le path et pathAdmin du sondage.
@@ -36,10 +38,29 @@ Url disponnibles RELEASE_DAY_3 :
 
 
 
+Url disponnibles RELEASE_DAY_4 :
+
+** WEB
+
+- /yes/:path : permet de voter oui pour un QRCode de type Oui/Non
+
+- /no/:path : permet de voter non pour un QRCode de type Oui/Non
+
+- /admin/get/yesno/:pathAdmin : permet de voir les resultats pour un QRCode de type Oui/Non
+
+
+** API
+
+- /api/admin/add/yesno : permet de creer un QRCode de type Oui/Non
+
+- /api/admin/gethourlystats/:pathAdmin/:days : permet de récupérer le nombre de flashs par heure days jours plus tôt
+
+- /api/admin/getdailystats/:pathAdmin : permet de récupérer le nombre de flashs des 7 derniers jours
+
+
 Fichiers liés :
 
 - INSTALL permet de spécifier comment installer le projet.
 - journal.org indique les tâches restantes, et donne des indicateurs projet.
-- contributors.txt contient la liste des membres ayant participé à ce projet.
+- contributors.txt contient la liste des membres ayqnt participé à ce projet.
 - le dossier conception contient des documents présentant la conception de notre application.
-- le fichier rapport-test.odt indique quels tests ont été effectués pour le projet (le responsable qualité de ce projet est Nicolas Viard).

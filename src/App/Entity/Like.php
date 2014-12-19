@@ -14,4 +14,12 @@ class Like extends QRCode
 
     protected $prefix = "like";
 
+     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
 }

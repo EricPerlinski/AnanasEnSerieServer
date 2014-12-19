@@ -22,13 +22,12 @@ class Survey extends QRCode
      **/
     private $question;
 
-
     /**
      * Constructor
      */
     public function __construct()
     {
-        parent();
+        parent::__construct();
         $this->question = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -63,5 +62,29 @@ class Survey extends QRCode
     public function getQuestion()
     {
         return $this->question;
+    }
+
+    public function jsonSerialize() {
+        return array(
+            'question' =>  json_encode($this->getQuestion())
+        );
+    }
+
+    public function printSurvey(){
+        foreach ($this->getQuestion() as $key => $question) {
+            if($question instanceof OpenQuestion){
+                echo "Question : ".$question->getQuestion()."<br>";
+            }else if($question instanceof CheckboxQuestion){
+                foreach ($question->getItem() as $key => $item) {
+                    echo $item->getText()." , ";
+                }
+                echo "<br>";
+            }else if($question instanceof RadioButtonQuestion){
+                foreach ($question->getItem() as $key => $item) {
+                    echo $item->getText()." , ";
+                }
+                echo "<br>";
+            }
+        }
     }
 }

@@ -11,9 +11,13 @@ use Doctrine\ORM\Mapping;
  */
 class CheckboxQuestion extends Question
 {
-	/**
-     * @OneToOne(targetEntity="Item")
-     * @JoinColumn(name="answer_id", referencedColumnName="id")
+
+    /**
+     * @ManyToMany(targetEntity="CheckboxAnswer")
+     * @JoinTable(name="checkboxquestion_answers",
+     *      joinColumns={@JoinColumn(name="question_id", referencedColumnName="id", onDelete="CASCADE"  )},
+     *      inverseJoinColumns={@JoinColumn(name="answer_id", referencedColumnName="id", unique=true)}
+     *      )
      **/
     private $answer;
 
@@ -32,29 +36,6 @@ class CheckboxQuestion extends Question
     public function __construct()
     {
         $this->item = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Set answer
-     *
-     * @param \App\Entity\Item $answer
-     * @return CheckboxQuestion
-     */
-    public function setAnswer(\App\Entity\Item $answer = null)
-    {
-        $this->answer = $answer;
-
-        return $this;
-    }
-
-    /**
-     * Get answer
-     *
-     * @return \App\Entity\Item 
-     */
-    public function getAnswer()
-    {
-        return $this->answer;
     }
 
     /**
@@ -88,5 +69,47 @@ class CheckboxQuestion extends Question
     public function getItem()
     {
         return $this->item;
+    }
+
+    /**
+     * Add answer
+     *
+     * @param \App\Entity\CheckboxAnswer $answer
+     * @return CheckboxQuestion
+     */
+    public function addAnswer(\App\Entity\CheckboxAnswer $answer)
+    {
+        $this->answer[] = $answer;
+
+        return $this;
+    }
+
+    /**
+     * Remove answer
+     *
+     * @param \App\Entity\CheckboxAnswer $answer
+     */
+    public function removeAnswer(\App\Entity\CheckboxAnswer $answer)
+    {
+        $this->answer->removeElement($answer);
+    }
+
+    /**
+     * Get answer
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAnswer()
+    {
+        return $this->answer;
+    }
+
+    public function jsonSerialize() {
+        return array('answer' => json_encode($this->getAnswer()), 
+            'item' => json_encode($this->getItem()));
+    }
+
+    public function getType(){
+        return "CheckboxQuestion";
     }
 }

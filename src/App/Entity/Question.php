@@ -41,9 +41,6 @@ abstract class Question implements \JsonSerializable
         return $this->id;
     }
 
-    public function jsonSerialize() {
-        return array();
-    }
 
     /**
      * Set text

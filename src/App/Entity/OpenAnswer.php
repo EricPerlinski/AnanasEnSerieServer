@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping;
 
 /**
  * @Entity
- * @Table(name="item")
+ * @Table(name="openanswer")
  */
-class Item implements \JsonSerializable
+class OpenAnswer
 {
 
     /**
@@ -24,13 +24,9 @@ class Item implements \JsonSerializable
     /**
      * @var string
      *
-     * @Column(name="text", type="string", length=255)
+     * @Column(name="answer", type="text")
      */
-    private $text;
-
-    public function jsonSerialize() {
-        return array('text' => json_encode($this->getText()));
-    }
+    private $answer;
 
     /**
      * Get id
@@ -42,27 +38,26 @@ class Item implements \JsonSerializable
         return $this->id;
     }
 
-
     /**
-     * Set text
+     * Set answer
      *
-     * @param string $text
-     * @return Item
+     * @param string $answer
+     * @return OpenAnswer
      */
-    public function setText($text)
+    public function setAnswer($answer)
     {
-        $this->text = $text;
+        $this->answer = $answer;
 
         return $this;
     }
 
     /**
-     * Get text
+     * Get answer
      *
      * @return string 
      */
-    public function getText()
+    public function getAnswer()
     {
-        return $this->text;
+        return $this->answer;
     }
 }

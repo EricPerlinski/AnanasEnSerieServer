@@ -81,8 +81,11 @@ $app->get('/like/:path', function ($path) use($app,$twig,$em){
 		$title = $qr->getTitle();
 		$counter = $qr->getCounter();
 
-		echo $twig->render('like.php',array('name' => $title , 'counter' => $counter));
-		$app->response->setStatus(200);
+		$app->flash('success', "Merci pour le Like.");
+		$app->redirect($app->urlFor('home', array()));
+		
+		//echo $twig->render('like.php',array('name' => $title , 'counter' => $counter));
+		//$app->response->setStatus(200);
 	}
 
 })->name('like')->conditions(['path' => '[0-9a-zA-Z]+']);
@@ -138,8 +141,11 @@ $app->get('/yes/:path', function ($path) use($app,$twig,$em){
 		$title = $qr->getTitle();
 		$counter = $qr->getCounter();
 
-		echo $twig->render('yes.php',array('name' => $title , 'counter' => $counter));
-		$app->response->setStatus(200);
+		$app->flash('success', "Merci pour le Oui.");
+		$app->redirect($app->urlFor('home', array()));
+
+		//echo $twig->render('yes.php',array('name' => $title , 'counter' => $counter));
+		//$app->response->setStatus(200);
 	}
 })->name('yes')->conditions(['path' => '[0-9a-zA-Z]+']);
 
@@ -168,8 +174,11 @@ $app->get('/no/:path', function ($path) use($app,$twig,$em){
 		$title = $qr->getTitle();
 		$counter = $qr->getCounter();
 
-		echo $twig->render('no.php',array('name' => $title , 'counter' => $counter));
-		$app->response->setStatus(200);
+		$app->flash('success', "Merci pour le Non.");
+		$app->redirect($app->urlFor('home', array()));
+
+		//echo $twig->render('no.php',array('name' => $title , 'counter' => $counter));
+		//$app->response->setStatus(200);
 	}
 })->name('no')->conditions(['path' => '[0-9a-zA-Z]+']);
 
@@ -189,6 +198,7 @@ $app->get('/survey/:path', function ($path) use($app,$twig,$em){
 		$title = $qr->getTitle();
 		$counter = $qr->getCounter();
 		$cible=$app->urlFor("surveyPOST",array('path' => $path));
+		
 		echo $twig->render('survey.php',array('name' => $title , 'survey' => $qr , 'cible' => $cible));
 		$app->response->setStatus(200);
 	}
@@ -252,8 +262,11 @@ $app->post('/survey/:path', function ($path) use($app,$twig,$em){
 			$title = $qr->getTitle();
 			$counter = $qr->getCounter();
 
-			echo $twig->render('surveyOk.php',array('name'=> $title, 'counter' => $counter ));	
-			$app->response->setStatus(200);
+			$app->flash('success', "Merci d'avoir rempli le sondage.");
+			$app->redirect($app->urlFor('home', array()));
+
+			//echo $twig->render('surveyOk.php',array('name'=> $title, 'counter' => $counter ));	
+			//$app->response->setStatus(200);
 		}else{
 			$app->setCookie("$path",false);
 			echo "Erreur sondage";

@@ -5,7 +5,7 @@
 {% block content %}
 <div class="row">
 	<div class="col-md-2">
-		<img src="/projet11/ananas.gif"/>
+		<img src="/projet11/asset/img/ananas.gif"/>
 	</div>
 	<div class="col-md-6 col-md-offset-1">
 		<p>

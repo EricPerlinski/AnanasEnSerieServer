@@ -60,8 +60,8 @@ $app->get('/like/:path', function ($path) use($app,$twig,$em){
 
 	$vote = $app->getCookie("$path");
 	if($vote){
-		echo "Vous avez déjà voté";
-		$app->response->setStatus(200);
+		$app->flash('danger', "Vous avez déjà liké.");
+		$app->redirect($app->urlFor('home', array()));
 	}else{
 
 		$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('path' => $path));
@@ -81,8 +81,11 @@ $app->get('/like/:path', function ($path) use($app,$twig,$em){
 		$title = $qr->getTitle();
 		$counter = $qr->getCounter();
 
-		echo $twig->render('like.php',array('name' => $title , 'counter' => $counter));
-		$app->response->setStatus(200);
+		$app->flash('success', "Merci pour le Like.");
+		$app->redirect($app->urlFor('home', array()));
+		
+		//echo $twig->render('like.php',array('name' => $title , 'counter' => $counter));
+		//$app->response->setStatus(200);
 	}
 
 })->name('like')->conditions(['path' => '[0-9a-zA-Z]+']);
@@ -117,8 +120,8 @@ $app->get('/redirect/:path', function ($path) use($app,$twig,$em){
 $app->get('/yes/:path', function ($path) use($app,$twig,$em){
 	$vote = $app->getCookie("$path");
 	if($vote){
-		echo "Vous avez déjà voté";
-		$app->response->setStatus(200);
+		$app->flash('danger', "Vous avez déjà répondu.");
+		$app->redirect($app->urlFor('home', array()));
 	}else{
 
 		$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('path' => $path));
@@ -138,16 +141,19 @@ $app->get('/yes/:path', function ($path) use($app,$twig,$em){
 		$title = $qr->getTitle();
 		$counter = $qr->getCounter();
 
-		echo $twig->render('yes.php',array('name' => $title , 'counter' => $counter));
-		$app->response->setStatus(200);
+		$app->flash('success', "Merci pour le Oui.");
+		$app->redirect($app->urlFor('home', array()));
+
+		//echo $twig->render('yes.php',array('name' => $title , 'counter' => $counter));
+		//$app->response->setStatus(200);
 	}
 })->name('yes')->conditions(['path' => '[0-9a-zA-Z]+']);
 
 $app->get('/no/:path', function ($path) use($app,$twig,$em){
 	$vote = $app->getCookie("$path");
 	if($vote){
-		echo "Vous avez déjà voté";
-		$app->response->setStatus(200);
+		$app->flash('danger', "Vous avez déjà répondu.");
+		$app->redirect($app->urlFor('home', array()));
 	}else{
 
 		$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('path' => $path));
@@ -168,16 +174,19 @@ $app->get('/no/:path', function ($path) use($app,$twig,$em){
 		$title = $qr->getTitle();
 		$counter = $qr->getCounter();
 
-		echo $twig->render('no.php',array('name' => $title , 'counter' => $counter));
-		$app->response->setStatus(200);
+		$app->flash('success', "Merci pour le Non.");
+		$app->redirect($app->urlFor('home', array()));
+
+		//echo $twig->render('no.php',array('name' => $title , 'counter' => $counter));
+		//$app->response->setStatus(200);
 	}
 })->name('no')->conditions(['path' => '[0-9a-zA-Z]+']);
 
 $app->get('/survey/:path', function ($path) use($app,$twig,$em){
 	$vote = $app->getCookie("$path");
 	if($vote){
-		echo "Vous avez déjà voté";
-		$app->response->setStatus(200);
+		$app->flash('danger', "Vous avez déjà répondu au sondage.");
+		$app->redirect($app->urlFor('home', array()));
 	}else{
 
 		$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('path' => $path));
@@ -189,7 +198,8 @@ $app->get('/survey/:path', function ($path) use($app,$twig,$em){
 		$title = $qr->getTitle();
 		$counter = $qr->getCounter();
 		$cible=$app->urlFor("surveyPOST",array('path' => $path));
-		echo $twig->render('survey.php',array('name' => $title , 'survey' => $qr , 'cible' => $cible));
+		
+		echo $twig->render('survey.php',array('nom' => $title , 'survey' => $qr , 'cible' => $cible));
 		$app->response->setStatus(200);
 	}
 })->name('survey')->conditions(['path' => '[0-9a-zA-Z]+']);
@@ -198,8 +208,8 @@ $app->get('/survey/:path', function ($path) use($app,$twig,$em){
 $app->post('/survey/:path', function ($path) use($app,$twig,$em){
 	$vote = $app->getCookie("$path");
 	if($vote){
-		echo "Vous avez déjà voté";
-		$app->response->setStatus(200);
+		$app->flash('danger', "Vous avez déjà répondu au sondage.");
+		$app->redirect($app->urlFor('home', array()));
 	}else{
 		$qr = $em->getRepository("App\Entity\QRCode")->findOneBy(array('path' => $path));
 		if($qr==null){
@@ -252,8 +262,11 @@ $app->post('/survey/:path', function ($path) use($app,$twig,$em){
 			$title = $qr->getTitle();
 			$counter = $qr->getCounter();
 
-			echo $twig->render('surveyOk.php',array('name'=> $title, 'counter' => $counter ));	
-			$app->response->setStatus(200);
+			$app->flash('success', "Merci d'avoir rempli le sondage.");
+			$app->redirect($app->urlFor('home', array()));
+
+			//echo $twig->render('surveyOk.php',array('name'=> $title, 'counter' => $counter ));	
+			//$app->response->setStatus(200);
 		}else{
 			$app->setCookie("$path",false);
 			echo "Erreur sondage";
@@ -281,7 +294,7 @@ $app->get('/admin/get/like/:pathAdmin', function ($pathAdmin) use($app,$twig,$em
 	$getDailyLog = $app->urlFor('getHourlyStats', array('pathAdmin' => $pathAdmin));
 	$getDailyLog = substr($getDailyLog, 0, $getDailyLog - 5);
 	echo $twig->render('adminLike.php',array(
-		'name'=> $title,
+		'nom'=> $title,
 		'counter' => $counter,
 		'getLog' => $getLog,
 		'getDailyLog' => $getDailyLog
@@ -305,7 +318,7 @@ $app->get('/admin/get/redirect/:pathAdmin', function ($pathAdmin) use($app,$twig
 	$getDailyLog = $app->urlFor('getHourlyStats', array('pathAdmin' => $pathAdmin));
 	$getDailyLog = substr($getDailyLog, 0, $getDailyLog - 5);
 	echo $twig->render('adminRedirect.php',array(
-		'name'=> $title, 'counter' => $counter, 'url' => $url ,
+		'nom'=> $title, 'counter' => $counter, 'url' => $url ,
 		'target' => $app->urlFor('adminRedirectPOST', array('pathAdmin' => $pathAdmin)), 
 		'flash' => isset($_SESSION['slim.flash']) ? $_SESSION['slim.flash'] : null,
 		'getLog' => $getLog,
@@ -350,7 +363,7 @@ $app->get('/admin/get/yes/:pathAdmin', function ($pathAdmin) use($app,$twig,$em)
 	$getDailyLog = $app->urlFor('getHourlyStats', array('pathAdmin' => $pathAdmin));
 	$getDailyLog = substr($getDailyLog, 0, $getDailyLog - 5);
 	echo $twig->render('adminYesNo.php',array(
-		'name'=> $title,
+		'nom'=> $title,
 		'counter' => $counter,
 		'counterNo' => $counterNo,
 		'getLog' => $getLog,
@@ -417,7 +430,7 @@ $app->get('/admin/get/survey/:pathAdmin', function ($pathAdmin) use($app,$twig,$
 	$getDailyLog = substr($getDailyLog, 0, $getDailyLog - 5);
 
 	echo $twig->render('adminSurvey.php',array(
-		'name'=> $title, 
+		'nom'=> $title, 
 		'counter' => $counter, 
 		'survey' => $reponse,
 		'flash' => isset($_SESSION['slim.flash']) ? $_SESSION['slim.flash'] : null,
@@ -650,17 +663,17 @@ $app->get('/api/admin/getdailystats/:pathAdmin', function ($pathAdmin) use($app,
 
 	foreach ($qr->getClickLog() as $clickLog) {
 		$index = 7 - 1 - $clickLog->getDate()->diff($date)->days;
-		if($days >= 0){
-			$clickLogs[7 - 1 - $clickLog->getDate()->diff($date)->days]['y'] ++;
+		if($index >= 0){
+			$clickLogs[$index]['y'] ++;
 		}
 	}
 
 	if($qr instanceof YesNo){
 		foreach ($qr->getClickLogNo() as $clickLog) {
 			$index = 7 - 1 - $clickLog->getDate()->diff($date)->days;
-			if($days >= 0){
-				$noClickLogs[7 - 1 - $clickLog->getDate()->diff($date)->days]['y'] ++;
-			}
+		if($index >= 0){
+			$noClickLogs[$index]['y'] ++;
+		}
 		}
 	}
 

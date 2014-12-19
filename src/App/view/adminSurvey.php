@@ -3,53 +3,57 @@
 {% block title %}Redirection pour {{ nom }} {% endblock %}
 
 {% block content %}
-<div class="row">
-Il y a {{counter}} réponses pour le sondage {{name}}.
-</div>
-<div class="row">
+	Il y a {{counter}} réponses pour le sondage {{name}}.
+
 	{% include 'frequency.php' %}
-</div>
-<div class="row">
 
-	{% for open in survey['open'] %}
-		{% for k, q in open %}
-			<div>
-		    	Réponses pour {{k}} : <br>
-		    		{% for answer in q %}
-		    			-{{ answer }}<br>	
-		    		{% endfor %}	
-			</div>
+
+	<div class="row>">
+		{% for open in survey['open'] %}
+			{% for k, q in open %}
+				<div>
+			    	<h4>{{k}}</h4>
+			    	<ul>
+			    		{% for answer in q %}
+			    			<li>{{ answer }}</li>	
+			    		{% endfor %}
+			    	</ul>	
+				</div>
+			{% endfor%}
 		{% endfor%}
-	{% endfor%}
 
-	{% for radio in survey['radio'] %}
-		{% for k, q in radio %}
-		<div>
-	    	Réponses pour {{k}} : <br>
-	    	{% for answer in q %}
-	    		{% for text,nb in answer %}
-	    			-{{ text }} : {{ nb }}<br>		
-	    		{% endfor %}	
-	    	{% endfor %}
-		</div>
-		{% endfor %}
-	{% endfor%}
+		{% for radio in survey['radio'] %}
+			{% for k, q in radio %}
+			<div>
+		    	<h4>{{k}}</h4>
+		    	<ul>
+			    	{% for answer in q %}
+			    		{% for text,nb in answer %}
+			    			<li>{{ text }} : {{ nb }}</li>		
+			    		{% endfor %}	
+			    	{% endfor %}
+			    </ul>
+			</div>
+			{% endfor %}
+		{% endfor%}
 
 
-	{% for check in survey['check'] %}
-		{% for k, q in check %}
-		<div>
-	    	Réponses pour {{k}} : <br>
-	    	{% for answer in q %}
-	    		{% for text,nb in answer %}
-	    			-{{ text }} : {{ nb }}<br>		
-	    		{% endfor %}	
-	    	{% endfor %}
-		</div>
-		{% endfor %}
-	{% endfor%}
+		{% for check in survey['check'] %}
+			{% for k, q in check %}
+			<div>
+		    	<h4>{{k}}</h4>
+		    	<ul>
+		    	{% for answer in q %}
+		    		{% for text,nb in answer %}
+		    			<li>{{ text }} : {{ nb }}</li>		
+		    		{% endfor %}	
+		    	{% endfor %}
+		    	</ul>
+			</div>
+			{% endfor %}
+		{% endfor%}
 
+	</div>
 		
 
-</div>
 {% endblock %}

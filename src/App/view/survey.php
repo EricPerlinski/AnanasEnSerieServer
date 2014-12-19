@@ -7,31 +7,38 @@
 <h2>Sondage {{survey.title}}</h2>
 
 <form action="{{cible}}" method="POST">
-	{% for q in survey.question %}
-		<div>
-		    {% if q.type == "OpenQuestion" %}
-		    	<div class="open_question">
-		    		{{ q.question }} : <input type="text" id="{{q.id}}" name="{{q.id}}">
-		    	</div>
-		    {% elseif q.type == "RadioButtonQuestion" %}
-				<div class="radio_button_question">
-					{{ q.text }} : 
-					{% for rb in q.item %}
-						<input type="radio" id="{{rb.id}}" name="{{q.id}}" value="{{rb.id}}">{{rb.text}}
-					{% endfor %}
-				</div>    
-		    {% elseif q.type == "CheckboxQuestion" %}
-			    <div class="check_box_question">
-					{{ q.text }} : 
-					{% for cb in q.item %}
-						<input type="checkbox" id="{{cb.id}}" name="{{q.id}}[]" value="{{cb.id}}">{{cb.text}}
-					{% endfor %}
+	<ol>
+		{% for k,q in survey.question %}
+			<li>
+				<div>
+				    {% if q.type == "OpenQuestion" %}
+				    	<div class="form-group">
+				    		<h4>{{ q.question }} : </h4>
+				    		<input type="text" id="{{q.id}}" name="{{q.id}}">
+				    	</div>
+				    {% elseif q.type == "RadioButtonQuestion" %}
+						<h4>{{ q.text }} : </h4>
+						<div class="form-group"> 
+							{% for rb in q.item %}
+								<label for="{{q.id}}">{{rb.text}}</label>
+								<input type="radio" id="{{rb.id}}" name="{{q.id}}" value="{{rb.id}}">
+							{% endfor %}
+						</div>    
+				    {% elseif q.type == "CheckboxQuestion" %}
+					 	<h4>{{ q.text }} : </h4>
+					    <div class="form-group"> 
+							{% for cb in q.item %}
+								<label for="{{q.id}}">{{cb.text}}</label>
+								<input type="checkbox" id="{{cb.id}}" name="{{q.id}}[]" value="{{cb.id}}">
+							{% endfor %}
+						</div>
+				    {% endif %}
+				    
 				</div>
-		    {% endif %}
-		    
-		</div>
-	{% endfor %}
-	<input type="submit"/>
+			</li>
+		{% endfor %}
+		<input type="submit"/>
+	</ol>
 </form>
 
 

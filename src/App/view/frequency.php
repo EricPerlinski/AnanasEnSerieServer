@@ -1,3 +1,5 @@
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
 		<div>
 			<div class="btn-group pull-right">
 				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -288,3 +290,5 @@
 	});
 
 		</script>
+</div>
+</div>

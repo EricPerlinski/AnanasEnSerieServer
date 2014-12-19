@@ -57,6 +57,18 @@ Url disponnibles RELEASE_DAY_4 :
 
 - /api/admin/getdailystats/:pathAdmin : permet de récupérer le nombre de flashs des 7 derniers jours
 
+Url disponnibles RELEASE_DAY_5 :
+
+** WEB
+
+- /survey/:path : permet de remplir un QRCode de type Sondage
+
+- /admin/get/survey/:pathAdmin : permet de voir les resultats pour un QRCode de type Survey
+
+
+** API
+
+- /api/admin/add/survey : permet de creer un QRCode de type Sondage
 
 Fichiers liés :
 

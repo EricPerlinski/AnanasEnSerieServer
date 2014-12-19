@@ -1,4 +1,4 @@
-<div class="row footer">
+<div class="collapse navbar-collapse">
 	<p>
 		Ce projet a été réalisé par Valentin Giannini, Valentin Jeannot, Éric Perlinski et Nicolas Viard.
 	<p>

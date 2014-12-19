@@ -199,7 +199,7 @@ $app->get('/survey/:path', function ($path) use($app,$twig,$em){
 		$counter = $qr->getCounter();
 		$cible=$app->urlFor("surveyPOST",array('path' => $path));
 		
-		echo $twig->render('survey.php',array('name' => $title , 'survey' => $qr , 'cible' => $cible));
+		echo $twig->render('survey.php',array('nom' => $title , 'survey' => $qr , 'cible' => $cible));
 		$app->response->setStatus(200);
 	}
 })->name('survey')->conditions(['path' => '[0-9a-zA-Z]+']);
@@ -294,7 +294,7 @@ $app->get('/admin/get/like/:pathAdmin', function ($pathAdmin) use($app,$twig,$em
 	$getDailyLog = $app->urlFor('getHourlyStats', array('pathAdmin' => $pathAdmin));
 	$getDailyLog = substr($getDailyLog, 0, $getDailyLog - 5);
 	echo $twig->render('adminLike.php',array(
-		'name'=> $title,
+		'nom'=> $title,
 		'counter' => $counter,
 		'getLog' => $getLog,
 		'getDailyLog' => $getDailyLog
@@ -318,7 +318,7 @@ $app->get('/admin/get/redirect/:pathAdmin', function ($pathAdmin) use($app,$twig
 	$getDailyLog = $app->urlFor('getHourlyStats', array('pathAdmin' => $pathAdmin));
 	$getDailyLog = substr($getDailyLog, 0, $getDailyLog - 5);
 	echo $twig->render('adminRedirect.php',array(
-		'name'=> $title, 'counter' => $counter, 'url' => $url ,
+		'nom'=> $title, 'counter' => $counter, 'url' => $url ,
 		'target' => $app->urlFor('adminRedirectPOST', array('pathAdmin' => $pathAdmin)), 
 		'flash' => isset($_SESSION['slim.flash']) ? $_SESSION['slim.flash'] : null,
 		'getLog' => $getLog,
@@ -363,7 +363,7 @@ $app->get('/admin/get/yes/:pathAdmin', function ($pathAdmin) use($app,$twig,$em)
 	$getDailyLog = $app->urlFor('getHourlyStats', array('pathAdmin' => $pathAdmin));
 	$getDailyLog = substr($getDailyLog, 0, $getDailyLog - 5);
 	echo $twig->render('adminYesNo.php',array(
-		'name'=> $title,
+		'nom'=> $title,
 		'counter' => $counter,
 		'counterNo' => $counterNo,
 		'getLog' => $getLog,
@@ -430,7 +430,7 @@ $app->get('/admin/get/survey/:pathAdmin', function ($pathAdmin) use($app,$twig,$
 	$getDailyLog = substr($getDailyLog, 0, $getDailyLog - 5);
 
 	echo $twig->render('adminSurvey.php',array(
-		'name'=> $title, 
+		'nom'=> $title, 
 		'counter' => $counter, 
 		'survey' => $reponse,
 		'flash' => isset($_SESSION['slim.flash']) ? $_SESSION['slim.flash'] : null,

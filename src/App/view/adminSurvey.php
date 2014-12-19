@@ -3,7 +3,7 @@
 {% block title %}Redirection pour {{ nom }} {% endblock %}
 
 {% block content %}
-	Il y a {{counter}} réponses pour le sondage {{name}}.
+	Il y a {{counter}} réponses pour le sondage {{nom}}.
 
 	{% include 'frequency.php' %}
 
